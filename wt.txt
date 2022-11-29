@@ -1,0 +1,3853 @@
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 1
+Aim: Create an application in which you are required to get the user profile information with
+help of standard asp.net server controls.
+Procedure:
+Use the Text Box, Label, Button control and properties like Auto post back, Text Mode,
+Text and other element.
+Create a GUI which takes values from user and Display it in standard web controls.
+CODE:
+1) WebForm1.aspx 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs"
+Inherits="EXP1.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+ 
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <h1>User Information</h1>
+ <table>
+ <tr>
+ <td >FirstName</td>
+ <td>
+ <asp:TextBox ID="fn" runat="server"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>LastName</td>
+ <td>
+ <asp:TextBox ID="ln" runat="server"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>Email</td>
+ <td>
+ <asp:TextBox ID="em" runat="server"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>Gender</td>
+ <td>
+ <asp:RadioButton ID="Male" runat="server" GroupName="Gender"
+Text="Male" />
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <asp:RadioButton ID="Female" runat="server"
+GroupName="Gender" Text="Female" />
+ </td>
+ </tr>
+ <tr>
+ <td>Country</td>
+ <td>
+ <asp:DropDownList ID="DropDownList1" runat="server"
+AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+ <asp:ListItem>Select Country</asp:ListItem>
+ <asp:ListItem>India</asp:ListItem>
+ <asp:ListItem>US</asp:ListItem>
+ <asp:ListItem>Canada</asp:ListItem>
+ </asp:DropDownList>
+ </td>
+ </tr>
+ <tr>
+ <td>State</td>
+ <td>
+ <asp:DropDownList ID="DropDownList2" runat="server">
+ <asp:ListItem>Select State</asp:ListItem>
+ </asp:DropDownList>
+ </td>
+ </tr>
+ <tr>
+ <td>MobileNo</td>
+ <td>
+ <asp:TextBox ID="mo" runat="server" 
+TextMode="Number"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>Address</td>
+ <td>
+ <asp:TextBox ID="ad" runat="server" TextMode="MultiLine"
+Rows="4" ></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>Password</td>
+ <td>
+ <asp:TextBox ID="pa" runat="server" TextMode="Password"
+></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>ConfrimPassword</td>
+ <td>
+ <asp:TextBox ID="TextBox6" runat="server" 
+TextMode="Password"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td></td>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <td>
+ <asp:Button ID="su" runat="server" OnClick="su_Click"
+Text="Submit" />
+ <asp:Button ID="cl" runat="server" OnClick="cl_Click"
+Text="Clear" />
+ </td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td><strong>Submited Information</strong></td>
+ </tr>
+ <tr>
+ <td >FirstName</td>
+ <td >
+ <asp:Label ID="f" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td >LastName</td>
+ <td >
+ <asp:Label ID="l" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td >Email</td>
+ <td >
+ <asp:Label ID="ema" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Gender</td>
+ <td>
+ <asp:Label ID="g" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Country</td>
+ <td>
+ <asp:Label ID="c" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>State</td>
+ <td>
+ <asp:Label ID="s" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>MobileNo</td>
+ <td>
+ <asp:Label ID="m" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <td>Address</td>
+ <td>
+ <asp:Label ID="a" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Password</td>
+ <td>
+ <asp:Label ID="p" runat="server"></asp:Label>
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+2) WebForm1.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace Exp1
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ }
+ protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs 
+e)
+ {
+ if(DropDownList1.SelectedValue == "India")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("Gujarat"));
+ DropDownList2.Items.Add(new ListItem("Maharastra"));
+ DropDownList2.Items.Add(new ListItem("Goa"));
+ }
+ if (DropDownList1.SelectedValue == "US")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("California"));
+ DropDownList2.Items.Add(new ListItem("Texas"));
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ DropDownList2.Items.Add(new ListItem("Florida"));
+ }
+ if (DropDownList1.SelectedValue == "Canada")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("Alberta"));
+ DropDownList2.Items.Add(new ListItem("Ontario"));
+ DropDownList2.Items.Add(new ListItem("Qubec"));
+ }
+ }
+ protected void su_Click(object sender, EventArgs e)
+ {
+ f.Text = fn.Text;
+ l.Text = ln.Text;
+ ema.Text = em.Text;
+ if (Male.Checked)
+ {
+ g.Text = Male.Text;
+ }
+ else if (Female.Checked)
+ {
+ g.Text = Female.Text;
+ }
+ c.Text = DropDownList1.SelectedValue.ToString();
+ s.Text = DropDownList2.SelectedValue.ToString();
+ m.Text = mo.Text;
+ a.Text = ad.Text;
+ p.Text = pa.Text;
+ }
+ protected void cl_Click(object sender, EventArgs e)
+ {
+ fn.Text = "";
+ ln.Text = "";
+ em.Text = "";
+ mo.Text = "";
+ ad.Text = "";
+ pa.Text = "";
+ TextBox6.Text = "";
+ DropDownList1.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select Country"));
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ Male.Checked= false;
+ Female.Checked = false;
+ g.Text = "";
+ f.Text = fn.Text;
+ l.Text = ln.Text;
+ ema.Text = em.Text;
+ c.Text ="";
+ s.Text = "";
+ m.Text = mo.Text;
+ a.Text = ad.Text;
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ p.Text = pa.Text;
+ }
+ }
+}
+OUTPUT: 
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 2
+Aim: Extend the User profile Application which allow user to select the Material Status and
+Hobbies.
+Procedure:
+Create Radio Button that Allows user to have Single selection for the Material Status.
+Create Checkbox List that Allow user to select the hobbies.
+On pressing the Submit Button retrieve all values and display on the screen.
+Use all Basic web controls available.
+CODE:
+1) WebForm1.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs"
+Inherits="EXP2.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+ 
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <h1>User Information</h1>
+ <table>
+ <tr>
+ <td >FirstName</td>
+ <td>
+ <asp:TextBox ID="fn" runat="server"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>LastName</td>
+ <td>
+ <asp:TextBox ID="ln" runat="server"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>Email</td>
+ <td>
+ <asp:TextBox ID="em" runat="server"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <td>Gender</td>
+ <td>
+ <asp:RadioButton ID="Male" runat="server" GroupName="Gender"
+Text="Male" />
+ <asp:RadioButton ID="Female" runat="server"
+GroupName="Gender" Text="Female" />
+ </td>
+ </tr>
+ <tr>
+ <td>MaterialStatus</td>
+ <td>
+ <asp:RadioButton ID="singal" runat="server"
+GroupName="mat" Text="Single" />
+ <asp:RadioButton ID="married" runat="server"
+GroupName="mat" Text="Married" />
+ </td>
+ </tr>
+<tr>
+ <td>Hobbies</td>
+ <td>
+ <asp:CheckBoxList ID="CheckBoxList1" runat="server">
+ <asp:ListItem>Cricket</asp:ListItem>
+ <asp:ListItem>Coding</asp:ListItem>
+ <asp:ListItem>VollyBall</asp:ListItem>
+ </asp:CheckBoxList>
+ </td>
+ </tr>
+ <tr>
+ <td>Country</td>
+ <td>
+ <asp:DropDownList ID="DropDownList1" runat="server"
+AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+ <asp:ListItem>Select Country</asp:ListItem>
+ <asp:ListItem>India</asp:ListItem>
+ <asp:ListItem>US</asp:ListItem>
+ <asp:ListItem>Canada</asp:ListItem>
+ </asp:DropDownList>
+ </td>
+ </tr>
+ <tr>
+ <td>State</td>
+ <td>
+ <asp:DropDownList ID="DropDownList2" runat="server">
+ <asp:ListItem>Select State</asp:ListItem>
+ </asp:DropDownList>
+ </td>
+ </tr>
+ <tr>
+ <td>MobileNo</td>
+ <td>
+ <asp:TextBox ID="mo" runat="server" 
+TextMode="Number"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>Address</td>
+ <td>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <asp:TextBox ID="ad" runat="server" TextMode="MultiLine"
+Rows="4" ></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>Password</td>
+ <td>
+ <asp:TextBox ID="pa" runat="server" TextMode="Password"
+></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>ConfrimPassword</td>
+ <td>
+ <asp:TextBox ID="TextBox6" runat="server" 
+TextMode="Password"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td></td>
+ <td>
+ <asp:Button ID="su" runat="server" OnClick="su_Click"
+Text="Submit" />
+ <asp:Button ID="cl" runat="server" OnClick="cl_Click"
+Text="Clear" />
+ </td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td><strong>Submited Information</strong></td>
+ </tr>
+ <tr>
+ <td >FirstName</td>
+ <td >
+ <asp:Label ID="f" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td >LastName</td>
+ <td >
+ <asp:Label ID="l" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td >Email</td>
+ <td >
+ <asp:Label ID="ema" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <td>Gender</td>
+ <td>
+ <asp:Label ID="g" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>MaterialStatus</td>
+ <td>
+ <asp:Label ID="ma" runat="server"></asp:Label>
+ </td>
+ </tr>
+<tr>
+ <td>Hobbies</td>
+ <td>
+ <asp:Label ID="ha" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Country</td>
+ <td>
+ <asp:Label ID="c" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>State</td>
+ <td>
+ <asp:Label ID="s" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>MobileNo</td>
+ <td>
+ <asp:Label ID="m" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Address</td>
+ <td>
+ <asp:Label ID="a" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Password</td>
+ <td>
+ <asp:Label ID="p" runat="server"></asp:Label>
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+2) WebForm1.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace Exp2
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ }
+ protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+ {
+ if (DropDownList1.SelectedValue == "India")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("Gujarat"));
+ DropDownList2.Items.Add(new ListItem("Maharastra"));
+ DropDownList2.Items.Add(new ListItem("Goa"));
+ }
+ if (DropDownList1.SelectedValue == "US")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("California"));
+ DropDownList2.Items.Add(new ListItem("Texas"));
+ DropDownList2.Items.Add(new ListItem("Florida"));
+ }
+ if (DropDownList1.SelectedValue == "Canada")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("Alberta"));
+ DropDownList2.Items.Add(new ListItem("Ontario"));
+ DropDownList2.Items.Add(new ListItem("Qubec"));
+ }
+ }
+ protected void su_Click(object sender, EventArgs e)
+ {
+ f.Text = fn.Text;
+ l.Text = ln.Text;
+ ema.Text = em.Text;
+ if (Male.Checked)
+ {
+ g.Text = Male.Text;
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ }
+ else if (Female.Checked)
+ {
+ g.Text = Female.Text;
+ }
+ if (singal.Checked)
+ {
+ ma.Text = singal.Text;
+ }
+ else if (married.Checked)
+ {
+ ma.Text = married.Text;
+ }
+ Literal la = new Literal();
+ la.Text = "";
+ for (int i=0;i<CheckBoxList1.Items.Count;i++)
+ {
+ if (CheckBoxList1.Items[i].Selected)
+ {
+ la.Text += CheckBoxList1.Items[i].Value.ToString();
+ }
+ }
+ ha.Controls.Add(la);
+ c.Text = DropDownList1.SelectedValue.ToString();
+ s.Text = DropDownList2.SelectedValue.ToString();
+ m.Text = mo.Text;
+ a.Text = ad.Text;
+ p.Text = pa.Text;
+ }
+ protected void cl_Click(object sender, EventArgs e)
+ {
+ fn.Text = "";
+ ln.Text = "";
+ em.Text = "";
+ mo.Text = "";
+ ad.Text = "";
+ pa.Text = "";
+ TextBox6.Text = "";
+ DropDownList1.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select Country"));
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ Male.Checked = false;
+ Female.Checked = false;
+ singal.Checked = false;
+ married.Checked = false;
+ CheckBoxList1.ClearSelection();
+ g.Text = "";
+ ma.Text = "";
+ f.Text = fn.Text;
+ l.Text = ln.Text;
+ ema.Text = em.Text;
+ c.Text = "";
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ s.Text = "";
+ m.Text = mo.Text;
+ a.Text = ad.Text;
+ p.Text = pa.Text;
+ }
+ 
+ }
+}
+OUTPUT: 
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 3
+Aim: Implement the calculator with the help of the Command argument and command name
+properties of the button control.
+Procedure:
+Create GUI in which user has the facility enter two number and facility to perform the
+Addition, subtraction, multiplication and division operation
+The Division Operation Should not suffers from the Divide by zero error.
+Set the properties of button like command name, command argument.
+Generate command event for all operation like addition, subtraction, multiplication and
+division.
+CODE:
+1) WebForm1.ASPX
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs"
+Inherits="EXP3.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ Number 1 :-
+ <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+ <br />
+ Number 2:-&nbsp;
+ <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+ <br />
+ <br />
+ <asp:Button ID="Button1" runat="server" Text="+" Width="51px"
+CommandArgument="add" CommandName="mathamatics" OnCommand="Calcfunction" />
+&nbsp;<asp:Button ID="Button2" runat="server" Text="-" Width="47px"
+CommandArgument="sub" CommandName="mathamatics" OnCommand="Calcfunction" />
+&nbsp;<asp:Button ID="Button3" runat="server" Text="/" Width="55px"
+CommandArgument="div" CommandName="mathamatics" OnCommand="Calcfunction" />
+&nbsp;<asp:Button ID="Button4" runat="server" Text="*" Width="54px"
+CommandArgument="mul" CommandName="mathamatics" OnCommand="Calcfunction" />
+ <br />
+ <br />
+ Result:- <asp:PlaceHolder ID="PlaceHolder1"
+runat="server"></asp:PlaceHolder>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ </div>
+ </form>
+</body>
+</html>
+2) WebForm1.ASPX.CS :
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace Exp3
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ }
+ protected void Calcfunction(object sender, CommandEventArgs e)
+ {
+ string cmdstring = e.CommandName.ToString();
+ string cmdarg = e.CommandArgument.ToString();
+ if (cmdstring == "mathamatics")
+ {
+ if (cmdarg == "add")
+ {
+ Literal l = new Literal();
+ l.Text = (Convert.ToString(Convert.ToInt32(TextBox1.Text) + 
+Convert.ToInt32(TextBox2.Text)));
+ PlaceHolder1.Controls.Add(l) ;
+ }
+ if (cmdarg == "sub")
+ {
+ Literal l = new Literal();
+ l.Text = "";
+ l.Text += Convert.ToString(Convert.ToInt32(TextBox1.Text) -
+Convert.ToInt32(TextBox2.Text));
+ PlaceHolder1.Controls.Add(l);
+ 
+ }
+ if (cmdarg == "mul")
+ {
+ Literal l = new Literal();
+ l.Text = "";
+ l.Text += Convert.ToString(Convert.ToInt32(TextBox1.Text) * 
+Convert.ToInt32(TextBox2.Text));
+ PlaceHolder1.Controls.Add(l);
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ 
+ }
+ if (cmdarg == "div")
+ {
+ Literal l = new Literal();
+ l.Text = "";
+ l.Text += Convert.ToString(Convert.ToInt32(TextBox1.Text) / 
+Convert.ToInt32(TextBox2.Text));
+ PlaceHolder1.Controls.Add(l);
+ }
+ }
+ }
+ }
+}
+OUTPUT:
+(Below output is for division operator)
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 4
+Aim: Create Run time Table Control as per user requirement and display it on the page.
+Procedure:
+Create Place Holder that enables us to place our run time created control on web page.
+Create 3 drop down list which allows user to select no. of rows, no. of columns and grid
+line.
+On pressing the submit button Table Control should be created as per selected values.
+Create Button_Click event write code for auto generation of table.
+CODE:
+1) WebForm1.ASPX :
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs"
+Inherits="EXP4.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ Select Row :-
+ <asp:DropDownList ID="DropDownList1" runat="server">
+ <asp:ListItem>select row count</asp:ListItem>
+ <asp:ListItem>1</asp:ListItem>
+ <asp:ListItem>2</asp:ListItem>
+ <asp:ListItem>3</asp:ListItem>
+ <asp:ListItem>4</asp:ListItem>
+ </asp:DropDownList>
+ <br />
+ Select Colum :-
+ <asp:DropDownList ID="DropDownList2" runat="server">
+ <asp:ListItem>select col count</asp:ListItem>
+ <asp:ListItem>1</asp:ListItem>
+ <asp:ListItem>2</asp:ListItem>
+ <asp:ListItem>3</asp:ListItem>
+ <asp:ListItem>4</asp:ListItem>
+ </asp:DropDownList>
+ <br />
+ <asp:Button ID="Button1" runat="server" OnClick="Button1_Click"
+Text="Submit" />
+ <br />
+ <br />
+ <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ </div>
+ </form>
+</body>
+</html>
+2) WebForm1.ASPX.CS :
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace Exp4
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ Table t = new Table();
+ for(int i = 0; i < Convert.ToInt32(DropDownList1.SelectedItem.Value); 
+i++)
+ {
+ TableRow r = new TableRow();
+ for(int j=0; j < Convert.ToInt32(DropDownList2.SelectedValue); j++)
+ {
+ TableCell c = new TableCell();
+ c.Text = i.ToString() + " " + j.ToString();
+ c.BorderColor = System.Drawing.Color.Black;
+c.BorderStyle = BorderStyle.Solid;
+ r.Controls.Add(c);
+ }
+ t.Rows.Add(r);
+ }
+ t.BorderStyle = BorderStyle.Double;
+ PlaceHolder1.Controls.Add(t);
+ }
+ }
+}
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+OUTPUT:
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 5
+Aim: Create An Application which has Image, Image map and Image Button.
+Procedure:
+Use Image Control to Display the Image On The Page.
+Use Image Button Then it should Display the x and y co-ordinate .
+Use Image Map Create the Rectangle hotspot mode on clicking that page should be post
+back.
+Create Circular hot spot mode, on clicking that page should be navigate to next page.
+CODE :
+1) WebForm1.ASPX :
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs"
+Inherits="EXP5.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Image ID="Image1" runat="server" Height="323px"
+ImageUrl="~/Images/vehicleimg.jpg" Width="472px" />
+ <br />
+ above only image<br />
+ <br />
+ <br />
+ <br />
+ <asp:ImageMap ID="ImageMap1" runat="server" Height="369px"
+ImageUrl="~/Images/vehicleimg.jpg" OnClick="ImageMap1_Click" Width="486px">
+ <asp:CircleHotSpot AlternateText="this is circle hotspot"
+HotSpotMode="Navigate" NavigateUrl="~/WebForm1.aspx" Radius="20" X="20" Y="20" />
+ <asp:RectangleHotSpot AlternateText="this is rectangle hotspot"
+Bottom="100" HotSpotMode="PostBack" Left="100" PostBackValue="Rect" Right="340"
+Top="370" />
+ <asp:PolygonHotSpot AlternateText="this is polygon hotspot"
+Coordinates="600,410,680,460,650,540,540,540,520,460" HotSpotMode="Navigate"
+NavigateUrl="~/WebForm1.aspx" />
+ </asp:ImageMap>
+ <br />
+ Above image is image map<br />
+ <br />
+ <br />
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <asp:ImageButton ID="ImageButton1" runat="server" Height="477px"
+ImageUrl="~/Images/vehicleimg.jpg" OnClick="ImageButton1_Click" Width="520px" />
+ <br />
+ if you click Above image then you redirect at google home page</div>
+ </form>
+</body>
+</html>
+2) WebForm1.ASPX.CS :
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace exp5
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ Image1.ImageUrl = "~/Images/vehicleimg.jpg";
+ }
+ protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+ {
+ Response.Redirect("https://www.google.co.in/");
+ }
+ protected void ImageMap1_Click(object sender, ImageMapEventArgs e)
+ {
+ Response.Write(e.PostBackValue.ToString());
+ }
+ }
+}
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+OUTPUT :
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 6
+Aim: Extend the user Profile Application in which user is Allowed to select the Date of Birth
+from the Calendar Control.
+Procedure:
+Create Calendar Control that allows user to select the date.
+Also has the facility to Put Reminder in calendar control on particular date and that
+should be displayed when user navigate to that particular date in calendar control.
+CODE:
+1) WebForm1.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs"
+Inherits="EXP6.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+ 
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <h1>User Information</h1>
+ <table>
+ <tr>
+ <td >FirstName</td>
+ <td>
+ <asp:TextBox ID="fn" runat="server"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>LastName</td>
+ <td>
+ <asp:TextBox ID="ln" runat="server"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+<td>DOB</td>
+<td>
+ <asp:Calendar ID="cal1" runat="server"
+OnDayRender="Calendar1_DayRender" SelectionMode="DayWeekMonth"></asp:Calendar>
+ <asp:Button ID="Button1" runat="server" Text="Button"
+OnClick="Button1_Click" />
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="print 
+week" />
+ <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Date 
+arithmetic" />
+</td>
+ </tr>
+ <tr>
+ <td>Email</td>
+ <td>
+ <asp:TextBox ID="em" runat="server"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>Gender</td>
+ <td>
+ <asp:RadioButton ID="Male" runat="server" GroupName="Gender"
+Text="Male" />
+ <asp:RadioButton ID="Female" runat="server"
+GroupName="Gender" Text="Female" />
+ </td>
+ </tr>
+ <tr>
+ <td>MaterialStatus</td>
+ <td>
+ <asp:RadioButton ID="singal" runat="server"
+GroupName="mat" Text="Single" />
+ <asp:RadioButton ID="married" runat="server"
+GroupName="mat" Text="Married" />
+ </td>
+ </tr>
+<tr>
+ <td>Hobbies</td>
+ <td>
+ <asp:CheckBoxList ID="CheckBoxList1" runat="server">
+ <asp:ListItem>Cricket</asp:ListItem>
+ <asp:ListItem>Coding</asp:ListItem>
+ <asp:ListItem>VollyBall</asp:ListItem>
+ </asp:CheckBoxList>
+ </td>
+ </tr>
+ <tr>
+ <td>Country</td>
+ <td>
+ <asp:DropDownList ID="DropDownList1" runat="server"
+AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+ <asp:ListItem>Select Country</asp:ListItem>
+ <asp:ListItem>India</asp:ListItem>
+ <asp:ListItem>US</asp:ListItem>
+ <asp:ListItem>Canada</asp:ListItem>
+ </asp:DropDownList>
+ </td>
+ </tr>
+ <tr>
+ <td>State</td>
+ <td>
+ <asp:DropDownList ID="DropDownList2" runat="server">
+ <asp:ListItem>Select State</asp:ListItem>
+ </asp:DropDownList>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ </td>
+ </tr>
+ <tr>
+ <td>MobileNo</td>
+ <td>
+ <asp:TextBox ID="mo" runat="server" 
+TextMode="Number"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>Address</td>
+ <td>
+ <asp:TextBox ID="ad" runat="server" TextMode="MultiLine"
+Rows="4" ></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>Password</td>
+ <td>
+ <asp:TextBox ID="pa" runat="server" TextMode="Password"
+></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>ConfrimPassword</td>
+ <td>
+ <asp:TextBox ID="TextBox6" runat="server" 
+TextMode="Password"></asp:TextBox>
+ </td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td></td>
+ <td>
+ <asp:Button ID="su" runat="server" OnClick="su_Click"
+Text="Submit" />
+ <asp:Button ID="cl" runat="server" OnClick="cl_Click"
+Text="Clear" />
+ </td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td><strong>Submited Information</strong></td>
+ </tr>
+ <tr>
+ <td >FirstName</td>
+ <td >
+ <asp:Label ID="f" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <td >LastName</td>
+ <td >
+ <asp:Label ID="l" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td >Email</td>
+ <td >
+ <asp:Label ID="ema" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Gender</td>
+ <td>
+ <asp:Label ID="g" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>MaterialStatus</td>
+ <td>
+ <asp:Label ID="ma" runat="server"></asp:Label>
+ </td>
+ </tr>
+<tr>
+ <td>Hobbies</td>
+ <td>
+ <asp:Label ID="ha" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Country</td>
+ <td>
+ <asp:Label ID="c" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>State</td>
+ <td>
+ <asp:Label ID="s" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>MobileNo</td>
+ <td>
+ <asp:Label ID="m" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Address</td>
+ <td>
+ <asp:Label ID="a" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Password</td>
+ <td>
+ <asp:Label ID="p" runat="server"></asp:Label>
+ </td>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+2) WebForm1.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace Exp2
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ DateTime dt = cal1.SelectedDate;
+ Response.Write("Short date string: " + dt.ToShortDateString() + "<br/>");
+ Response.Write("Long date string: " + dt.ToLongDateString() + "<br/>");
+ }
+ protected void Button2_Click(object sender, EventArgs e)
+ {
+ foreach (DateTime dt in cal1.SelectedDates)
+ {
+ if (dt.ToShortDateString() == "15-07-2022")
+ Response.Write("this is 15-07-2022 date" + dt.ToShortDateString() 
++ "</br>");
+ }
+ }
+ protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+ {
+ if (e.Day.Date.ToShortDateString() == "15-07-2022")
+ {
+ HyperLink l = new HyperLink();
+ l.Text = "result";
+ l.NavigateUrl = "default.aspx";
+ e.Cell.Controls.Add(l);
+ e.Cell.BackColor = System.Drawing.Color.Red;
+ }
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ if (!e.Day.IsOtherMonth)
+ {
+ if (e.Day.DayNumberText == "1")
+ {
+ HyperLink l = new HyperLink();
+ l.Text = "welcome";
+l.NavigateUrl = "default.aspx";
+ e.Cell.Controls.Add(l);
+ }
+ }
+ if (e.Day.Date.ToShortDateString() == "18-07-2022")
+ {
+ e.Day.IsSelectable = false;
+ }
+ if (e.Day.IsWeekend)
+ {
+ e.Day.IsSelectable = false;
+ }
+ }
+ protected void Button3_Click(object sender, EventArgs e)
+ {
+ DateTime dt = new DateTime(2022, 7, 15);
+ Response.Write(dt.ToShortDateString());
+ DateTime stdate = DateTime.Now;
+ DateTime enddate = dt.AddDays(15);
+ DateTime userdate = cal1.SelectedDate;
+ if (userdate > stdate && userdate < enddate)
+ {
+ Response.Write("you have valid selection");
+ }
+ else
+ {
+ Response.Write("select another date");
+ }
+ }
+ protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+ {
+ if (DropDownList1.SelectedValue == "India")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("Gujarat"));
+ DropDownList2.Items.Add(new ListItem("Maharastra"));
+ DropDownList2.Items.Add(new ListItem("Goa"));
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ }
+ if (DropDownList1.SelectedValue == "US")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("California"));
+ DropDownList2.Items.Add(new ListItem("Texas"));
+ DropDownList2.Items.Add(new ListItem("Florida"));
+ }
+ if (DropDownList1.SelectedValue == "Canada")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("Alberta"));
+ DropDownList2.Items.Add(new ListItem("Ontario"));
+ DropDownList2.Items.Add(new ListItem("Qubec"));
+ }
+ }
+ protected void su_Click(object sender, EventArgs e)
+ {
+ f.Text = fn.Text;
+ l.Text = ln.Text;
+ ema.Text = em.Text;
+ if (Male.Checked)
+ {
+ g.Text = Male.Text;
+ }
+ else if (Female.Checked)
+ {
+ g.Text = Female.Text;
+ }
+ if (singal.Checked)
+ {
+ ma.Text = singal.Text;
+ }
+ else if (married.Checked)
+ {
+ ma.Text = married.Text;
+ }
+ Literal la = new Literal();
+ la.Text = "";
+ for (int i=0;i<CheckBoxList1.Items.Count;i++)
+ {
+ if (CheckBoxList1.Items[i].Selected)
+ {
+ la.Text += CheckBoxList1.Items[i].Value.ToString();
+ }
+ }
+ ha.Controls.Add(la);
+ c.Text = DropDownList1.SelectedValue.ToString();
+ s.Text = DropDownList2.SelectedValue.ToString();
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ m.Text = mo.Text;
+ a.Text = ad.Text;
+ p.Text = pa.Text;
+ }
+ protected void cl_Click(object sender, EventArgs e)
+ {
+ fn.Text = "";
+ ln.Text = "";
+ em.Text = "";
+ mo.Text = "";
+ ad.Text = "";
+ pa.Text = "";
+ TextBox6.Text = "";
+ DropDownList1.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select Country"));
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ Male.Checked = false;
+ Female.Checked = false;
+ singal.Checked = false;
+ married.Checked = false;
+ CheckBoxList1.ClearSelection();
+ g.Text = "";
+ ma.Text = "";
+ f.Text = fn.Text;
+ l.Text = ln.Text;
+ ema.Text = em.Text;
+ c.Text = "";
+ s.Text = "";
+ m.Text = mo.Text;
+ a.Text = ad.Text;
+ p.Text = pa.Text;
+ }
+ 
+ }
+}
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+OUTPUT:
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 7
+Aim: Extend the User Profile Application where User must have to Pass All the validation.
+Procedure:
+Create all required validation control on the page.
+Bind these controls to the asp.net server control that enables user to enter details.
+Like Username Should not are Empty, Password and Confirm Password Must Mach etc...
+CODE:
+1) WebForm1.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs"
+Inherits="EXP7.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ Enter your Name:&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox1" runat="server">Enter your name</asp:TextBox>
+ <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+BackColor="#FF6699" ControlToValidate="TextBox1" ErrorMessage="Please enter your 
+Name" InitialValue="Enter your name"
+ValidationGroup="first"></asp:RequiredFieldValidator>
+ <br />
+ <br />
+ Enter password :&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+ <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+BackColor="#3366FF" ControlToValidate="TextBox2" ErrorMessage="please Enter 
+password" ValidationGroup="first"></asp:RequiredFieldValidator>
+ <br />
+ <br />
+ Enter Confirm password:
+ <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+ <asp:CompareValidator ID="CompareValidator1" runat="server" BackColor="Lime"
+ControlToCompare="TextBox2" ControlToValidate="TextBox3" ErrorMessage="Password not 
+match!!!!!" ValidationGroup="first"></asp:CompareValidator>
+ <br />
+ <br />
+ Select Country :&nbsp;&nbsp;
+ <asp:DropDownList ID="DropDownList1" runat="server">
+ <asp:ListItem>Select Country</asp:ListItem>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <asp:ListItem>India</asp:ListItem>
+ <asp:ListItem>PAK</asp:ListItem>
+ <asp:ListItem>SRI LANKA</asp:ListItem>
+ <asp:ListItem>USA</asp:ListItem>
+ </asp:DropDownList>
+ <asp:CompareValidator ID="CompareValidator2" runat="server" BackColor="Red"
+ControlToValidate="DropDownList1" ErrorMessage="Please select your country"
+Operator="NotEqual" ValidationGroup="first" ValueToCompare="Select 
+Country"></asp:CompareValidator>
+ <br />
+ Enter your age :&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+ <asp:RangeValidator ID="RangeValidator1" runat="server"
+ControlToValidate="TextBox4" ErrorMessage="your age must be btw 18 to 99"
+MaximumValue="99" MinimumValue="18" Type="Integer"
+ValidationGroup="first"></asp:RangeValidator>
+ <br />
+ <br />
+ Enter your email :
+ <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+&nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator2"
+runat="server" BackColor="#FF3399" ControlToValidate="TextBox5" ErrorMessage="Enter 
+valid email id" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+ValidationGroup="first">*</asp:RegularExpressionValidator>
+&nbsp;&nbsp; //check regular explression<br />
+ <br />
+ <br />
+ Validation summary:<br />
+ <asp:ValidationSummary ID="ValidationSummary1" runat="server"
+ValidationGroup="first" />
+ <br />
+ <br />
+ <br />
+&nbsp;&nbsp;
+ <asp:Button ID="Button1" runat="server" OnClick="Button1_Click"
+Text="Submit" ValidationGroup="first" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:Button ID="Button2" runat="server" Text="Clear" ValidationGroup="clear"
+/>
+ </div>
+ </form>
+</body>
+</html>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+2) WebForm1.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP7
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ // UnobtrusiveValidationMode unobtrusiveValidationMode = new 
+UnobtrusiveValidationMode();
+ this.UnobtrusiveValidationMode = 
+System.Web.UI.UnobtrusiveValidationMode.None;
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ if (Page.IsValid == true)
+ {
+ Response.Write("all validation done!!!");
+ }
+ }
+ }
+}
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+OUTPUT:
+1. With Errors
+2. Without Error
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 8
+i) Aim: Create A master page and content Page Application for the University which enables
+user to see the faculty list according to department.
+Procedure:
+Master Page Contains the Header That Contains the University name and Address.
+Master Page Has the Facility to select the department as soon as it select the department
+then content page should display the names of the faculty in content page.
+CODE:
+1) DEPARTMENT.master:
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="DEPARTMENT.master.cs"
+Inherits="EXP8_1.DEPARTMENT" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+ <title></title>
+ <asp:ContentPlaceHolder ID="head" runat="server">
+ </asp:ContentPlaceHolder>
+</head>
+<body>
+ <header style="text-align: center">DHARMSINH DESAI UNIVERSITY</header>
+ <main>
+ <form id="form1" runat="server">
+ <div>
+ Depatments List :
+ <br />
+ <asp:HyperLink runat="server" ID="hl1"
+NavigateUrl="~/IT.aspx">INFORMATION TECH</asp:HyperLink>
+ <br />
+ <asp:HyperLink runat="server" ID="hl2"
+NavigateUrl="~/CE.aspx">COMPUTER SCIENCE</asp:HyperLink>
+ <br />
+ <asp:HyperLink runat="server" ID="hl3"
+NavigateUrl="~/EC.aspx">ELECTRICAL ENG</asp:HyperLink>
+ <br />
+ <br />
+ <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+ </asp:ContentPlaceHolder>
+ </div>
+ </form>
+ </main>
+ <footer style="text-align: center">NADIAD</footer>
+</body>
+</html>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+2) IT.ASPX
+<%@ Page Title="" Language="C#" MasterPageFile="~/DEPARTMENT.Master"
+AutoEventWireup="true" CodeBehind="IT.aspx.cs" Inherits="EXP8_1.IT" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
+runat="server">
+ IT FACULTIES:
+ <asp:Label runat="server">VD</asp:Label>
+ <asp:Label runat="server">MMG</asp:Label>
+ <asp:Label runat="server">ANV</asp:Label>
+</asp:Content>
+3) CE.ASPX
+<%@ Page Title="" Language="C#" MasterPageFile="~/DEPARTMENT.Master"
+AutoEventWireup="true" CodeBehind="CE.aspx.cs" Inherits="EXP8_1.WebForm1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
+runat="server">
+ CE FACULTIES:
+ <asp:Label runat="server">DCV</asp:Label>
+ <asp:Label runat="server">NV</asp:Label>
+ <asp:Label runat="server">VHS</asp:Label>
+</asp:Content>
+4) EC.ASPX
+<%@ Page Title="" Language="C#" MasterPageFile="~/DEPARTMENT.Master"
+AutoEventWireup="true" CodeBehind="EC.aspx.cs" Inherits="EXP8_1.WebForm2" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
+runat="server">
+ EC FACULTIES:
+ <asp:Label runat="server">JTB</asp:Label>
+ <asp:Label runat="server">KAL</asp:Label>
+ <asp:Label runat="server">NM</asp:Label>
+</asp:Content>
+OUTPUT:
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ii) Aim: Create an application in which user is allowed to upload the file on the server.
+Procedure:
+Select the file Upload Control that Allows user to upload file.
+Create the submit button that Stores the File on the Server.
+Create the Retrieve Button that Display the All the Details of the file like file name, file
+type and file size.
+Create Get All File Button that displays all file those are currently uploaded on server.
+CODE:
+1) WebForm1.ASPX
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs"
+Inherits="EXP8_2.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:FileUpload ID="FileUpload1" runat="server" />
+ <br />
+ <br />
+ <br />
+ <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Upload 
+File" />
+ 
+ <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * 
+FROM [imgtable]"></asp:SqlDataSource>
+ 
+ <asp:Button ID="Button2" runat="server" OnClick="Button2_Click"
+Text="display File" />
+ 
+ <asp:SqlDataSource ID="SqlDataSource2" runat="server"
+ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * 
+FROM [imgtable]"></asp:SqlDataSource>
+ 
+ <asp:GridView runat="server" ID="gv1" AllowSorting="True"
+AutoGenerateColumns="False" DataKeyNames="filename" DataSourceID="SqlDataSource2">
+ <Columns>
+ <asp:BoundField DataField="filename" HeaderText="filename"
+ReadOnly="True" SortExpression="filename"></asp:BoundField>
+ <asp:BoundField DataField="type" HeaderText="type"
+SortExpression="type"></asp:BoundField>
+ <asp:BoundField DataField="url" HeaderText="url"
+SortExpression="url"></asp:BoundField>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ </Columns>
+ </asp:GridView>
+ </div>
+ </form>
+</body>
+</html>
+2) Webform1.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP8_2
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ SqlConnection con = new SqlConnection(@"Data 
+Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integra
+ted Security=True");
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ if (FileUpload1.HasFile)
+ {
+ string path = FileUpload1.PostedFile.FileName.ToString();
+ con.Open();
+ SqlCommand cmd = con.CreateCommand();
+ cmd.Connection = con;
+ if (FileUpload1.PostedFile.ContentLength < 500000)
+ {
+ if (FileUpload1.PostedFile.ContentType == "image/jpeg" || 
+FileUpload1.PostedFile.ContentType == "image/png")
+ {
+ FileUpload1.PostedFile.SaveAs("F:\\sem 7\\WT\\EXP8-2\\EXP8-
+2\\Image\\" + path);
+ cmd.Parameters.AddWithValue("@name", path);
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ cmd.Parameters.AddWithValue("@type", 
+FileUpload1.PostedFile.ContentType.ToString());
+ cmd.Parameters.AddWithValue("@url", "F:\\sem 7\\WT\\EXP8-
+2\\EXP8-2\\Image\\" + path);
+ string query = "INSERT INTO [imgtable] 
+VALUES(@name,@type,@url)";
+ cmd.CommandText = query;
+ cmd.CommandType = System.Data.CommandType.Text;
+//SqlDataReader reader = cmd.ExecuteReader();
+int n = cmd.ExecuteNonQuery();
+ if (n > 0)
+ {
+ Response.Write(n + " Data Inserted Successfully");
+ }
+ con.Close();
+ }
+else
+{
+ Response.Write("please upload jpeg or png file ");
+ }
+ }
+ else { Response.Write("image size must be less than 1500 kilo 
+bytes"); }
+ }
+ else
+ {
+ Response.Write("please select file");
+ }
+ }
+ protected void Button2_Click(object sender, EventArgs e)
+ {
+ con.Open();
+ if (con.State == System.Data.ConnectionState.Open)
+ {
+ String query = "Select * FROM [imgtable]";
+ SqlCommand cmd = new SqlCommand();
+ cmd.Connection = con;
+ cmd.CommandText = query;
+ cmd.CommandType = System.Data.CommandType.Text;
+ SqlDataReader sd = cmd.ExecuteReader();
+ // gv1.DataSource = sd;
+ // gv1.DataBind();
+ con.Close();
+ }
+ }
+ }
+}
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+3) Imagedatabase
+OUTPUT: 
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 9
+I) Aim: - Create an application in which user has to display records in the Grid View Control
+from Table created in access data base. (With the Help of Oledb Classes or Access
+Data Source Control).
+Procedure:
+• Use the create a .MDB database using MS Access. Enter the values in table.
+• In Application use the Oledb Classes for database Connection.
+• Use Dataset Class for storing the values from Database. Use grid view control for
+displaying the data. Use bind () method for binding the dataset to grid view control.
+Code:-
+1.WebForm1.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs"
+Inherits="EXP9_1.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:GridView ID="GridView1" runat="server" AllowSorting="True"
+AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1">
+ <Columns>
+ <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"
+ShowSelectButton="True" />
+ <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True"
+SortExpression="Id" />
+ <asp:BoundField DataField="FirstName" HeaderText="FirstName"
+SortExpression="FirstName" />
+ <asp:BoundField DataField="LastName" HeaderText="LastName"
+SortExpression="LastName" />
+ <asp:BoundField DataField="Subject" HeaderText="Subject"
+SortExpression="Subject" />
+ <asp:BoundField DataField="Marks" HeaderText="Marks"
+SortExpression="Marks" />
+ </Columns>
+ </asp:GridView>
+ <br />
+ <br />
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+ConflictDetection="CompareAllValues" ConnectionString="<%$ 
+ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [students] WHERE 
+[Id] = @original_Id AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL 
+AND @original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR 
+([LastName] IS NULL AND @original_LastName IS NULL)) AND (([Subject] = 
+@original_Subject) OR ([Subject] IS NULL AND @original_Subject IS NULL)) AND 
+(([Marks] = @original_Marks) OR ([Marks] IS NULL AND @original_Marks IS NULL))"
+InsertCommand="INSERT INTO [students] ([FirstName], [LastName], [Subject], [Marks]) 
+VALUES (@FirstName, @LastName, @Subject, @Marks)"
+OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM 
+[students]" UpdateCommand="UPDATE [students] SET [FirstName] = @FirstName, 
+[LastName] = @LastName, [Subject] = @Subject, [Marks] = @Marks WHERE [Id] = 
+@original_Id AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND 
+@original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] 
+IS NULL AND @original_LastName IS NULL)) AND (([Subject] = @original_Subject) OR 
+([Subject] IS NULL AND @original_Subject IS NULL)) AND (([Marks] = @original_Marks) 
+OR ([Marks] IS NULL AND @original_Marks IS NULL))">
+ <DeleteParameters>
+ <asp:Parameter Name="original_Id" Type="Int32" />
+ <asp:Parameter Name="original_FirstName" Type="String" />
+ <asp:Parameter Name="original_LastName" Type="String" />
+ <asp:Parameter Name="original_Subject" Type="String" />
+ <asp:Parameter Name="original_Marks" Type="String" />
+ </DeleteParameters>
+ <InsertParameters>
+ <asp:Parameter Name="FirstName" Type="String" />
+ <asp:Parameter Name="LastName" Type="String" />
+ <asp:Parameter Name="Subject" Type="String" />
+ <asp:Parameter Name="Marks" Type="String" />
+ </InsertParameters>
+ <UpdateParameters>
+ <asp:Parameter Name="FirstName" Type="String" />
+ <asp:Parameter Name="LastName" Type="String" />
+ <asp:Parameter Name="Subject" Type="String" />
+ <asp:Parameter Name="Marks" Type="String" />
+ <asp:Parameter Name="original_Id" Type="Int32" />
+ <asp:Parameter Name="original_FirstName" Type="String" />
+ <asp:Parameter Name="original_LastName" Type="String" />
+ <asp:Parameter Name="original_Subject" Type="String" />
+ <asp:Parameter Name="original_Marks" Type="String" />
+ </UpdateParameters>
+ </asp:SqlDataSource>
+ </div>
+ </form>
+</body>
+</html>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+Output:-
+II) Aim:- Create An Application which stores user information to the database.
+Procedure:
+• Create data base either in MS Access or Sql Server.
+• Extend User Profile Application with all validation as soon as user press submit button
+all details are stored in data base.
+• Use Either OLEDB classes or Access or SQL Data Source.
+Code:-
+1.WebForm1.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" 
+Inherits="EXP9_2.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+ <style type="text/css">
+ .auto-style1 {
+ height: 34px;
+ }
+ </style>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <h1>Information About User</h1>
+ <table>
+ <tr>
+ <td class="auto-style1">FirstName</td>
+ <td class="auto-style1">
+ <asp:TextBox ID="fn" runat="server" ViewStateMode="Enabled" 
+ValidateRequestMode="Enabled"></asp:TextBox>
+ <asp:RequiredFieldValidator ID="r1" runat="server" 
+BackColor="White" BorderColor="#FF99CC" ControlToValidate="fn" ErrorMessage="Please 
+Enter your First Name" ForeColor="Red"></asp:RequiredFieldValidator>
+ </td>
+ </tr>
+ <tr>
+ <td>LastName</td>
+<td>
+ <asp:TextBox ID="ln" runat="server"></asp:TextBox>
+ <asp:RequiredFieldValidator ID="r2" runat="server" 
+ControlToValidate="ln" ErrorMessage="Please Enter your Last Name" 
+ForeColor="#FF3300"></asp:RequiredFieldValidator>
+ </td>
+ </tr>
+ <tr>
+ <td>Email</td>
+<td>
+ <asp:TextBox ID="em" runat="server"></asp:TextBox>
+<asp:RegularExpressionValidator ID="RegularExpressionValidator1" 
+runat="server" ControlToValidate="em" ErrorMessage="Enter your valid email id" 
+ForeColor="#FF3300" ValidationExpression="([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-
+9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-
+9]{1,3})(\]?)"></asp:RegularExpressionValidator>
+ </td>
+ </tr>
+ <tr>
+ <td>Date of Birth</td>
+<td>
+ <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
+ </td>
+ </tr>
+ <tr>
+ <td>Gender</td>
+<td>
+ <asp:RadioButton ID="Male" runat="server" GroupName="Gender" 
+Text="Male" />
+ <asp:RadioButton ID="Female" runat="server" GroupName="Gender" 
+Text="Female" />
+ &nbsp;
+</td>
+ </tr>
+ <tr>
+ <td>MaritalStatus</td>
+ <td>
+ <asp:RadioButton ID="singal" runat="server" GroupName="mat" 
+Text="Single" />
+ <asp:RadioButton ID="married" runat="server" GroupName="mat" 
+Text="Married" />
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ </td>
+ </tr>
+<tr>
+ <td>Hobbies</td>
+<td>
+ <asp:CheckBoxList ID="CheckBoxList1" runat="server">
+ <asp:ListItem>Cricket</asp:ListItem>
+ <asp:ListItem>Coding</asp:ListItem>
+<asp:ListItem>VollyBall</asp:ListItem>
+ </asp:CheckBoxList>
+ </td>
+ </tr>
+ <tr>
+ <td>Country</td>
+<td>
+ <asp:DropDownList ID="DropDownList1" runat="server" 
+AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+ <asp:ListItem>Select Country</asp:ListItem>
+<asp:ListItem>India</asp:ListItem>
+<asp:ListItem>US</asp:ListItem>
+<asp:ListItem>Canada</asp:ListItem>
+ </asp:DropDownList>
+ &nbsp;<asp:RequiredFieldValidator ID="r3" runat="server" 
+ControlToValidate="DropDownList1" ErrorMessage="Select Country" 
+ForeColor="#FF3300"></asp:RequiredFieldValidator>
+ </td>
+ </tr>
+ <tr>
+ <td>State</td>
+<td>
+ <asp:DropDownList ID="DropDownList2" runat="server">
+ <asp:ListItem>Select State</asp:ListItem>
+ </asp:DropDownList>
+ &nbsp;<asp:RequiredFieldValidator ID="r4" runat="server" 
+ControlToValidate="DropDownList2" ErrorMessage="Select State" 
+ForeColor="#FF3300"></asp:RequiredFieldValidator>
+ </td>
+ </tr>
+ <tr>
+ <td class="auto-style1">MobileNo</td>
+<td class="auto-style1">
+ <asp:TextBox ID="mo" runat="server" TextMode="Number" 
+OnTextChanged="mo_TextChanged"></asp:TextBox>
+ &nbsp;
+ </td>
+ </tr>
+ <tr>
+ <td>Address</td>
+<td>
+ <asp:TextBox ID="ad" runat="server" TextMode="MultiLine" 
+Rows="4" ></asp:TextBox>
+ &nbsp;<asp:RequiredFieldValidator ID="r6" runat="server" 
+ControlToValidate="ad" ErrorMessage="Please Fill Up Address" 
+ForeColor="#FF3300"></asp:RequiredFieldValidator>
+ </td>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ </tr>
+ <tr>
+ <td>Password</td>
+<td>
+ <asp:TextBox ID="pa" runat="server" TextMode="Password" 
+></asp:TextBox>
+ &nbsp;<asp:RequiredFieldValidator ID="r7" runat="server" 
+ControlToValidate="pa" ErrorMessage="Please Enter Password" 
+ForeColor="#FF3300"></asp:RequiredFieldValidator>
+ </td>
+ </tr>
+ <tr>
+ <td>ConfrimPassword</td>
+<td>
+ <asp:TextBox ID="TextBox6" runat="server" 
+TextMode="Password"></asp:TextBox>
+ &nbsp;
+ <asp:CompareValidator ID="CompareValidator1" runat="server" 
+ControlToCompare="pa" ControlToValidate="TextBox6" ErrorMessage="Password Can not 
+Matched" ForeColor="#FF3300"></asp:CompareValidator>
+ </td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+<td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td></td>
+<td>
+ <asp:Button ID="su" runat="server" OnClick="su_Click" 
+Text="Submit" />
+ <asp:Button ID="cl" runat="server" OnClick="cl_Click" 
+Text="Clear" />
+ </td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+<td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td><strong>Submited Information</strong></td>
+ </tr>
+ <tr>
+ <td >FirstName</td>
+<td >
+ <asp:Label ID="f" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td >LastName</td>
+<td >
+ <asp:Label ID="l" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <td >Email</td>
+<td >
+ <asp:Label ID="ema" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td >Date Of Birth</td>
+<td >
+ <asp:Label ID="dob" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Gender</td>
+ <td>
+ <asp:Label ID="g" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>MaterialStatus</td>
+<td>
+ <asp:Label ID="ma" runat="server"></asp:Label>
+ </td>
+ </tr>
+<tr>
+ <td>Hobbies</td>
+<td>
+ <asp:Label ID="ha" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Country</td>
+<td>
+ <asp:Label ID="c" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>State</td>
+<td>
+ <asp:Label ID="s" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>MobileNo</td>
+<td>
+ <asp:Label ID="m" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Address</td>
+<td>
+ <asp:Label ID="a" runat="server"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td>Password</td>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <td>
+ <asp:Label ID="p" runat="server"></asp:Label>
+ </td>
+ </tr>
+ </table>
+ <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+ConflictDetection="CompareAllValues" ConnectionString="<%$ 
+ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [students] WHERE [Id] 
+= @original_Id AND (([FirstName] = @original_FirstName) OR ([FirstName] IS NULL AND 
+@original_FirstName IS NULL)) AND (([LastName] = @original_LastName) OR ([LastName] IS 
+NULL AND @original_LastName IS NULL)) AND (([Email] = @original_Email) OR ([Email] IS 
+NULL AND @original_Email IS NULL)) AND (([DateOfBirth] = @original_DateOfBirth) OR 
+([DateOfBirth] IS NULL AND @original_DateOfBirth IS NULL)) AND (([Gender] = 
+@original_Gender) OR ([Gender] IS NULL AND @original_Gender IS NULL)) AND 
+(([MaterialStatus] = @original_MaterialStatus) OR ([MaterialStatus] IS NULL AND 
+@original_MaterialStatus IS NULL)) AND (([Country] = @original_Country) OR ([Country] IS 
+NULL AND @original_Country IS NULL)) AND (([State] = @original_State) OR ([State] IS 
+NULL AND @original_State IS NULL)) AND (([MobileNo] = @original_MobileNo) OR ([MobileNo] 
+IS NULL AND @original_MobileNo IS NULL)) AND (([Address] = @original_Address) OR 
+([Address] IS NULL AND @original_Address IS NULL)) AND (([Password] = 
+@original_Password) OR ([Password] IS NULL AND @original_Password IS NULL))" 
+InsertCommand="INSERT INTO [students] ([FirstName], [LastName], [Email], [DateOfBirth], 
+[Gender], [MaterialStatus], [Country], [State], [MobileNo], [Address], [Password]) 
+VALUES (@FirstName, @LastName, @Email, @DateOfBirth, @Gender, @MaterialStatus, @Country, 
+@State, @MobileNo, @Address, @Password)" OldValuesParameterFormatString="original_{0}" 
+SelectCommand="SELECT * FROM [students]" UpdateCommand="UPDATE [students] SET 
+[FirstName] = @FirstName, [LastName] = @LastName, [Email] = @Email, [DateOfBirth] = 
+@DateOfBirth, [Gender] = @Gender, [MaterialStatus] = @MaterialStatus, [Country] = 
+@Country, [State] = @State, [MobileNo] = @MobileNo, [Address] = @Address, [Password] = 
+@Password WHERE [Id] = @original_Id AND (([FirstName] = @original_FirstName) OR 
+([FirstName] IS NULL AND @original_FirstName IS NULL)) AND (([LastName] = 
+@original_LastName) OR ([LastName] IS NULL AND @original_LastName IS NULL)) AND 
+(([Email] = @original_Email) OR ([Email] IS NULL AND @original_Email IS NULL)) AND 
+(([DateOfBirth] = @original_DateOfBirth) OR ([DateOfBirth] IS NULL AND 
+@original_DateOfBirth IS NULL)) AND (([Gender] = @original_Gender) OR ([Gender] IS NULL 
+AND @original_Gender IS NULL)) AND (([MaterialStatus] = @original_MaterialStatus) OR 
+([MaterialStatus] IS NULL AND @original_MaterialStatus IS NULL)) AND (([Country] = 
+@original_Country) OR ([Country] IS NULL AND @original_Country IS NULL)) AND (([State] = 
+@original_State) OR ([State] IS NULL AND @original_State IS NULL)) AND (([MobileNo] = 
+@original_MobileNo) OR ([MobileNo] IS NULL AND @original_MobileNo IS NULL)) AND 
+(([Address] = @original_Address) OR ([Address] IS NULL AND @original_Address IS NULL)) 
+AND (([Password] = @original_Password) OR ([Password] IS NULL AND @original_Password IS 
+NULL))">
+ <DeleteParameters>
+ <asp:Parameter Name="original_Id" Type="Int32" />
+<asp:Parameter Name="original_FirstName" Type="String" />
+<asp:Parameter Name="original_LastName" Type="String" />
+<asp:Parameter Name="original_Email" Type="String" />
+<asp:Parameter Name="original_DateOfBirth" Type="String" />
+<asp:Parameter Name="original_Gender" Type="String" />
+<asp:Parameter Name="original_MaterialStatus" Type="String" />
+<asp:Parameter Name="original_Country" Type="String" />
+<asp:Parameter Name="original_State" Type="String" />
+<asp:Parameter Name="original_MobileNo" Type="Decimal" />
+<asp:Parameter Name="original_Address" Type="String" />
+ <asp:Parameter Name="original_Password" Type="Object" />
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ </DeleteParameters>
+ <InsertParameters>
+ <asp:Parameter Name="FirstName" Type="String" />
+<asp:Parameter Name="LastName" Type="String" />
+<asp:Parameter Name="Email" Type="String" />
+<asp:Parameter Name="DateOfBirth" Type="String" />
+<asp:Parameter Name="Gender" Type="String" />
+<asp:Parameter Name="MaterialStatus" Type="String" />
+<asp:Parameter Name="Country" Type="String" />
+<asp:Parameter Name="State" Type="String" />
+<asp:Parameter Name="MobileNo" Type="Decimal" />
+ <asp:Parameter Name="Address" Type="String" />
+ <asp:Parameter Name="Password" Type="Object" />
+ </InsertParameters>
+ <UpdateParameters>
+ <asp:Parameter Name="FirstName" Type="String" />
+<asp:Parameter Name="LastName" Type="String" />
+<asp:Parameter Name="Email" Type="String" />
+<asp:Parameter Name="DateOfBirth" Type="String" />
+<asp:Parameter Name="Gender" Type="String" />
+<asp:Parameter Name="MaterialStatus" Type="String" />
+<asp:Parameter Name="Country" Type="String" />
+<asp:Parameter Name="State" Type="String" />
+<asp:Parameter Name="MobileNo" Type="Decimal" />
+<asp:Parameter Name="Address" Type="String" />
+<asp:Parameter Name="Password" Type="Object" />
+<asp:Parameter Name="original_Id" Type="Int32" />
+ <asp:Parameter Name="original_FirstName" Type="String" />
+ <asp:Parameter Name="original_LastName" Type="String" />
+<asp:Parameter Name="original_Email" Type="String" />
+<asp:Parameter Name="original_DateOfBirth" Type="String" />
+<asp:Parameter Name="original_Gender" Type="String" />
+<asp:Parameter Name="original_MaterialStatus" Type="String" />
+ <asp:Parameter Name="original_Country" Type="String" />
+ <asp:Parameter Name="original_State" Type="String" />
+<asp:Parameter Name="original_MobileNo" Type="Decimal" />
+<asp:Parameter Name="original_Address" Type="String" />
+<asp:Parameter Name="original_Password" Type="Object" />
+ </UpdateParameters>
+ </asp:SqlDataSource>
+ </div>
+ </form>
+</body>
+</html>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+2. WebForm.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP9_2
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ SqlConnection con = new SqlConnection(@"Data 
+Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Database1.mdf;Integrat
+ed Security=True");
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ con.Open();
+ if (con.State == System.Data.ConnectionState.Open)
+ {
+ //Response.Write("All DOne");
+ con.Close();
+ }
+ }
+ protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs 
+e)
+ {
+ if (DropDownList1.SelectedValue == "India")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("Gujarat"));
+ DropDownList2.Items.Add(new ListItem("Maharastra"));
+ DropDownList2.Items.Add(new ListItem("Goa"));
+ }
+ if (DropDownList1.SelectedValue == "US")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("California"));
+ DropDownList2.Items.Add(new ListItem("Texas"));
+ DropDownList2.Items.Add(new ListItem("Florida"));
+ }
+ if (DropDownList1.SelectedValue == "Canada")
+ {
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ DropDownList2.Items.Add(new ListItem("Alberta"));
+ DropDownList2.Items.Add(new ListItem("Ontario"));
+ DropDownList2.Items.Add(new ListItem("Qubec"));
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ }
+ }
+ protected void su_Click(object sender, EventArgs e)
+ {
+ if (Page.IsValid)
+ {
+ f.Text = fn.Text;
+ l.Text = ln.Text;
+ ema.Text = em.Text;
+ if (Male.Checked)
+ {
+ g.Text = Male.Text;
+ }
+ else if (Female.Checked)
+ {
+ g.Text = Female.Text;
+ }
+ if (singal.Checked)
+ {
+ ma.Text = singal.Text;
+ }
+ else if (married.Checked)
+ {
+ ma.Text = married.Text;
+ }
+ Literal la = new Literal();
+ la.Text = "";
+ for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+ {
+ if (CheckBoxList1.Items[i].Selected)
+ {
+ la.Text += CheckBoxList1.Items[i].Value.ToString();
+ }
+ }
+ dob.Text = Calendar1.SelectedDate.ToShortDateString();
+ ha.Controls.Add(la);
+ c.Text = DropDownList1.SelectedValue.ToString();
+ s.Text = DropDownList2.SelectedValue.ToString();
+ m.Text = mo.Text;
+ a.Text = ad.Text;
+ p.Text = pa.Text;
+ con.Open();
+ string qury = "insert into students 
+(FirstName,LastName,Email,DOB,Gender,MaritalStatus,Country,State,Mobile,Address,Pass
+word) values('" + f.Text + "','" + l.Text + "','" + ema.Text + "','" + dob.Text + 
+"','" + g.Text + "','" + ma.Text + "','" + c.Text + "','" + s.Text + "','" + m.Text 
++ "','" + a.Text + "','" + p.Text + "')";
+ SqlCommand cmd = new SqlCommand(qury, con);
+ int u = cmd.ExecuteNonQuery();
+ if (u > 0)
+ {
+ Response.Write("DataSave on dataBase");
+ }
+ con.Close();
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ }
+ }
+ protected void cl_Click(object sender, EventArgs e)
+ {
+ fn.Text = "";
+ ln.Text = "";
+ em.Text = "";
+ mo.Text = "";
+ ad.Text = "";
+ pa.Text = "";
+ TextBox6.Text = "";
+ DropDownList1.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select Country"));
+ DropDownList2.Items.Clear();
+ DropDownList2.Items.Add(new ListItem("Select State"));
+ Male.Checked = false;
+ Female.Checked = false;
+ singal.Checked = false;
+ married.Checked = false;
+ CheckBoxList1.ClearSelection();
+ g.Text = "";
+ ma.Text = "";
+ f.Text = fn.Text;
+ l.Text = ln.Text;
+ ema.Text = em.Text;
+ c.Text = "";
+ s.Text = "";
+ m.Text = mo.Text;
+ a.Text = ad.Text;
+ p.Text = pa.Text;
+ }
+ protected void mo_TextChanged(object sender, EventArgs e)
+ {
+ }
+ }
+}
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+Output:- 
+ 
+ 
+ 
+ 
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 10
+Aim: Create the Sign In, Sign Up and Update Application
+Procedure:
+Procedure: user has all facility like registration, update profile and login.
+As soon as user login user should navigate to update page where all the details of that
+user must be displayed accordingly.
+User Session Object to store the User Information.
+Use the Access/Sql Data source or The OLEDB Classes for the Data Base Connectivity.
+Code:-
+1.login.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs"
+Inherits="EXP10.login" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <table style="width: 20%; height: 200px">
+ <tr>
+ <td>Username:</td>
+ <td>
+ <asp:TextBox ID="tbUname" runat="server" />
+ </td>
+ </tr>
+ <tr>
+ <td>Password:</td>
+ <td>
+ <asp:TextBox ID="tbPass" runat="server" TextMode="Password"
+/>
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <asp:Button ID="btnSignIn" runat="server" Text="Sign In"
+OnClick="BtnSignIn_Click" />
+ </td>
+<td>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <asp:Button ID="btnSignUp" runat="server" Text="Sign Up"
+OnClick="BtnSignUp_Click"/>
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+2.login.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP10
+{
+ public partial class login : System.Web.UI.Page
+ {
+ SqlConnection cn;
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ cn = new SqlConnection(@"Data 
+Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=F:\sem 
+7\WT\EXP10\EXP10\App_Data\Database1.mdf;Integrated Security=True");
+ }
+ protected void BtnSignIn_Click(object sender, EventArgs e)
+ {
+ cn.Open();
+ if (cn.State == ConnectionState.Open)
+ {
+ string query = "select * from Student where stu_uname = '" + 
+tbUname.Text + "' and stu_pass = '" + tbPass.Text + "'";
+ SqlCommand cmd = new SqlCommand(query, cn);
+ SqlDataAdapter da = new SqlDataAdapter(cmd);
+ DataSet ds = new DataSet();
+ da.Fill(ds, "T1");
+ Session["policy"] = ds;
+ if (ds.Tables["T1"].Rows.Count > 0)
+ {
+ Session["uname"] = 
+ds.Tables["T1"].Rows[0]["stu_uname"].ToString();
+ Response.Redirect("signinsignup.aspx");
+ }
+ else
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ {
+ Response.Write("Invalid Credential");
+ }
+ cn.Close();
+ }
+ }
+ protected void BtnSignUp_Click(object sender, EventArgs e)
+ {
+ Session.Remove("uname");
+ Response.Redirect("signinsignup.aspx");
+ }
+ }
+}
+3. signup.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="signup.aspx.cs"
+Inherits="EXP10.signup" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <table style="width: 20%; height: 200px">
+ <tr>
+ <td>Username:</td>
+ <td>
+ <asp:TextBox ID="tbUname" runat="server" />
+ </td>
+ </tr>
+ <tr>
+ <td>First Name:</td>
+ <td>
+ <asp:TextBox ID="tbFname" runat="server" />
+ </td>
+ </tr>
+ <tr>
+ <td>Last Name:</td>
+ <td>
+ <asp:TextBox ID="tbLname" runat="server" />
+ </td>
+ </tr>
+ <tr>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <td>Password:</td>
+ <td>
+ <asp:TextBox ID="tbPass" runat="server" TextMode="Password"
+/>
+ </td>
+ </tr>
+ <tr>
+ <td colspan="2">
+ <asp:Button ID="btnSubmit" runat="server" Text="Sign Up"
+OnClick="BtnSubmit_Click" />
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+4.signup.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP10
+{
+ public partial class signup : System.Web.UI.Page
+ {
+ SqlConnection cn;
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ if (Session["uname"] != null)
+ {
+ btnSubmit.Text = "Update Data";
+ DataSet ds = (DataSet)Session["policy"];
+ tbUname.Text = ds.Tables["T1"].Rows[0]["stu_uname"].ToString();
+ tbUname.Enabled = false;
+ tbFname.Text = ds.Tables["T1"].Rows[0]["stu_fname"].ToString();
+ tbLname.Text = ds.Tables["T1"].Rows[0]["stu_lname"].ToString();
+ }
+ else
+ {
+ btnSubmit.Text = "Sign Up";
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ }
+ cn = new SqlConnection(@"Data 
+Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=F:\sem 
+7\WT\EXP10\EXP10\App_Data\Database1.mdf;Integrated Security=True");
+ }
+ protected void BtnSubmit_Click(object sender, EventArgs e)
+ {
+ cn.Open();
+ if (cn.State == ConnectionState.Open)
+ {
+ if (Session["uname"] != null)
+ {
+ string query = "update Student set stu_fname = @fn, stu_lname = 
+@ln, stu_pass = @pass";
+ SqlCommand cmd = new SqlCommand(query, cn);
+ SqlParameter p1 = new SqlParameter("@fn", tbFname.Text);
+ SqlParameter p2 = new SqlParameter("@ln", tbLname.Text);
+ SqlParameter p3 = new SqlParameter("@pass", tbPass.Text);
+ cmd.Parameters.Add(p1);
+cmd.Parameters.Add(p2);
+cmd.Parameters.Add(p3);
+if (cmd.ExecuteNonQuery() > 0 && tbFname.Text.Length > 0 && 
+tbLname.Text.Length > 0 && tbPass.Text.Length > 0)
+ {
+ Response.Write("Updation successful");
+ }
+ else
+{
+ Response.Write("Updation not successful");
+ }
+ }
+ else
+ {
+ string query = "insert into 
+Student(stu_fname,stu_lname,stu_uname,stu_pass) values(@fn,@ln,@un,@pass)";
+ SqlCommand cmd = new SqlCommand(query, cn);
+ SqlParameter p1 = new SqlParameter("@fn", tbFname.Text);
+ SqlParameter p2 = new SqlParameter("@ln", tbLname.Text);
+ SqlParameter p3 = new SqlParameter("@un", tbUname.Text);
+ SqlParameter p4 = new SqlParameter("@pass", tbPass.Text);
+ cmd.Parameters.Add(p1);
+ cmd.Parameters.Add(p2);
+cmd.Parameters.Add(p3);
+cmd.Parameters.Add(p4);
+if (cmd.ExecuteNonQuery() > 0)
+ {
+ Response.Write("Sign-Up successful");
+ }
+else
+{
+ Response.Write("Sign-Up not successful");
+ }
+ }
+ }
+ cn.Close();
+ }
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ }
+}
+5.signinsignup.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="signinsignup.aspx.cs"
+Inherits="EXP10.signinsignup" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <table style="width: 20%; height: 200px">
+ <tr>
+ <td>Username:</td>
+ <td>
+ <asp:TextBox ID="tbUname" runat="server" />
+ </td>
+ </tr>
+ <tr>
+ <td>First Name:</td>
+ <td>
+ <asp:TextBox ID="tbFname" runat="server" />
+ </td>
+ </tr>
+ <tr>
+ <td>Last Name:</td>
+ <td>
+ <asp:TextBox ID="tbLname" runat="server" />
+ </td>
+ </tr>
+ <tr>
+ <td>Password:</td>
+ <td>
+ <asp:TextBox ID="tbPass" runat="server" TextMode="Password"
+/>
+ </td>
+ </tr>
+ <tr>
+ <td colspan="2">
+ <asp:Button ID="btnSubmit" runat="server" Text="Sign Up"
+OnClick="BtnSubmit_Click" />
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+6.signinsignup.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP10
+{
+ public partial class signinsignup : System.Web.UI.Page
+ {
+ SqlConnection cn;
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ if (Session["uname"] != null)
+ {
+ btnSubmit.Text = "Update Data";
+ DataSet ds = (DataSet)Session["policy"];
+ tbUname.Text = ds.Tables["T1"].Rows[0]["stu_uname"].ToString();
+ tbUname.Enabled = false;
+ tbFname.Text = ds.Tables["T1"].Rows[0]["stu_fname"].ToString();
+ tbLname.Text = ds.Tables["T1"].Rows[0]["stu_lname"].ToString();
+ }
+ else
+ {
+ btnSubmit.Text = "Sign Up";
+ }
+ cn = new SqlConnection(@"Data 
+Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=F:\sem 
+7\WT\EXP10\EXP10\App_Data\Database1.mdf;Integrated Security=True");
+ }
+ protected void BtnSubmit_Click(object sender, EventArgs e)
+ {
+ cn.Open();
+ if (cn.State == ConnectionState.Open)
+ {
+ if (Session["uname"] != null)
+ {
+ string query = "update Student set stu_fname = @fn, stu_lname = 
+@ln, stu_pass = @pass";
+ SqlCommand cmd = new SqlCommand(query, cn);
+ SqlParameter p1 = new SqlParameter("@fn", tbFname.Text);
+ SqlParameter p2 = new SqlParameter("@ln", tbLname.Text);
+ SqlParameter p3 = new SqlParameter("@pass", tbPass.Text);
+ cmd.Parameters.Add(p1);
+cmd.Parameters.Add(p2);
+cmd.Parameters.Add(p3);
+ if (cmd.ExecuteNonQuery() > 0 && tbFname.Text.Length > 0 && 
+tbLname.Text.Length > 0 && tbPass.Text.Length > 0)
+ {
+ Response.Write("Updation successful");
+ }
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ else
+ {
+ Response.Write("Updation not successful");
+ }
+ }
+ else
+ {
+ string query = "insert into Student values(@fn,@ln,@un,@pass)";
+ SqlCommand cmd = new SqlCommand(query, cn);
+ SqlParameter p1 = new SqlParameter("@fn", tbFname.Text);
+ SqlParameter p2 = new SqlParameter("@ln", tbLname.Text);
+ SqlParameter p3 = new SqlParameter("@un", tbUname.Text);
+ SqlParameter p4 = new SqlParameter("@pass", tbPass.Text);
+ cmd.Parameters.Add(p1);
+cmd.Parameters.Add(p2);
+ cmd.Parameters.Add(p3);
+ cmd.Parameters.Add(p4);
+if (cmd.ExecuteNonQuery() > 0)
+ {
+ Response.Write("Sign-Up successful");
+ }
+else
+{
+ Response.Write("Sign-Up not successful");
+ }
+ }
+ }
+ cn.Close();
+ }
+ }
+}
+ 
+ 
+ 
+ 
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ 
+ 
+ 
+ 
+ 
+Output:-
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 11
+Aim: Create Application in which user is able to Submit his Profile with help of the Wizard and
+ Multi View Control.
+Procedure:
+Create The Step wise GUI for (wizard/Multiview ) in which user can put his details.
+In fist Step Personal Information, in second step Academic information and last Job
+Profile as soon as he press submit button all details should be displayed.
+Code:-
+1.WizardView.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WizardView.aspx.cs"
+Inherits="EXP11.WizardView" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Wizard ID="Wizard1" runat="server" ActiveStepIndex="0"
+OnFinishButtonClick="Wizard1_FinishButtonClick"
+OnNextButtonClick="Wizard1_NextButtonClick">
+ <WizardSteps>
+ <asp:WizardStep runat="server" Title="Personal Information">
+ Full Name:-<asp:TextBox ID="TextBox1" runat="server"
+></asp:TextBox>
+ <br />
+ Email :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox
+ID="TextBox2" runat="server"></asp:TextBox>
+ <br />
+ Phone No:-
+<asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+ <br />
+ </asp:WizardStep>
+ <asp:WizardStep runat="server" Title="Academic information">
+ 12th Pass Year:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+ <br />
+ 12th percantage:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+ <br />
+ 10th Pass Year:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+ <br />
+ 10th percantage:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+ <br />
+ Collage PassOutYear:-<asp:TextBox ID="TextBox8"
+runat="server"></asp:TextBox>
+ <br />
+ Cpi:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
+ </asp:WizardStep>
+ <asp:WizardStep runat="server" Title="last Job">
+ LastJobLocation:-&nbsp;
+<asp:TextBox ID="TextBox10" runat="server"></asp:TextBox>
+ <br />
+ Package:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox11" runat="server"></asp:TextBox>
+ <br />
+ YearOfExperince:-<asp:TextBox ID="TextBox12"
+runat="server"></asp:TextBox>
+ </asp:WizardStep>
+ </WizardSteps>
+ </asp:Wizard>
+ <br />
+ </div>
+ </form>
+</body>
+</html>
+ 
+ 
+ 
+ 
+2. WizardView.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP11
+{
+ public partial class WizardView : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ }
+ protected void Wizard1_FinishButtonClick(object sender, 
+WizardNavigationEventArgs e)
+ {
+ Session["lg"] = TextBox10.Text;
+ Session["pa"] = TextBox11.Text;
+ Session["yoe"] = TextBox12.Text;
+ Response.Redirect("~/View.aspx");
+ }
+ protected void Wizard1_NextButtonClick(object sender, 
+WizardNavigationEventArgs e)
+ {
+ if (e.NextStepIndex == 1)
+ {
+ Session["fn"] = TextBox1.Text;
+ Session["em"] = TextBox2.Text;
+ Session["po"] = TextBox3.Text;
+ }
+ if (e.NextStepIndex == 2)
+ {
+ Session["12y"] = TextBox4.Text;
+ Session["12p"] = TextBox5.Text;
+ Session["10y"] = TextBox6.Text;
+ Session["10p"] = TextBox7.Text;
+ Session["cy"] = TextBox8.Text;
+ Session["cpi"] = TextBox9.Text;
+ }
+ }
+ }
+}
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+Wizard Output:-
+ 
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+3. MultiView.aspx 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MultiView.aspx.cs"
+Inherits="EXP11.MultiView" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
+ <asp:View ID="View1" runat="server">
+ Full Name:-<asp:TextBox ID="TextBox1" runat="server"
+></asp:TextBox>
+ <br />
+ Email :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox
+ID="TextBox2" runat="server"></asp:TextBox>
+ <br />
+ Phone No:-
+<asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+ <br />
+ <asp:Button ID="Button1" runat="server" Text="Next"
+OnClick="Button1_Click" />
+ <br />
+ </asp:View>
+ <asp:View ID="View2" runat="server">
+ 12th Pass Year:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+ <br />
+ 12th percantage:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+ <br />
+ 10th Pass Year:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+ <br />
+ 10th percantage:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+ <br />
+ Collage PassOutYear:-<asp:TextBox ID="TextBox8"
+runat="server"></asp:TextBox>
+ <br />
+ Cpi:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
+ <br />
+ <asp:Button ID="Button2" runat="server" Text="Prevease"
+OnClick="Button2_Click" />
+ &nbsp;<asp:Button ID="Button3" runat="server" Text="Next"
+OnClick="Button3_Click" />
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ </asp:View>
+ <asp:View ID="View3" runat="server">
+ LastJobLocation:-&nbsp;
+ <asp:TextBox ID="TextBox10" runat="server"></asp:TextBox>
+ <br />
+ Package:-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <asp:TextBox ID="TextBox11" runat="server"></asp:TextBox>
+ <br />
+ YearOfExperince:-<asp:TextBox ID="TextBox12"
+runat="server"></asp:TextBox>
+ <br />
+ <asp:Button ID="Button4" runat="server" Text="Finish"
+OnClick="Button4_Click" />
+ </asp:View>
+ </asp:MultiView>
+ </div>
+ </form>
+</body>
+</html>
+4. MultiView.aspx.cs 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP11
+{
+ public partial class MultiView : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ Session["fn"] = TextBox1.Text;
+ Session["em"] = TextBox2.Text;
+ Session["po"] = TextBox3.Text;
+ MultiView1.SetActiveView(View2);
+ }
+ protected void Button3_Click(object sender, EventArgs e)
+ {
+ Session["12y"] = TextBox4.Text;
+ Session["12p"] = TextBox5.Text;
+ Session["10y"] = TextBox6.Text;
+ Session["10p"] = TextBox7.Text;
+ Session["cy"] = TextBox8.Text;
+ Session["cpi"] = TextBox9.Text;
+ MultiView1.SetActiveView(View3);
+ }
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ protected void Button4_Click(object sender, EventArgs e)
+ {
+ Session["lg"] = TextBox10.Text;
+ Session["pa"] = TextBox11.Text;
+ Session["yoe"] = TextBox12.Text;
+ Response.Redirect("~/View.aspx");
+ }
+ protected void Button2_Click(object sender, EventArgs e)
+ {
+ MultiView1.SetActiveView(View1);
+ }
+ }
+}
+ 
+5.View.aspx 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="View.aspx.cs"
+Inherits="EXP11.View" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+ <style type="text/css">
+ .auto-style1 {
+ width: 100%;
+ }
+ .auto-style2 {
+ width: 227px;
+ }
+ .auto-style3 {
+ width: 227px;
+ height: 26px;
+ }
+ .auto-style4 {
+ height: 26px;
+ }
+ </style>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <table class="auto-style1">
+ <tr>
+ <td class="auto-style2">Full Name:-</td>
+ <td>
+ <asp:Label ID="Label1" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <td class="auto-style2">Email :-</td>
+ <td>
+ <asp:Label ID="Label2" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td class="auto-style2">Phone No:-</td>
+ <td>
+ <asp:Label ID="Label3" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td class="auto-style2">12th Pass Year:-</td>
+ <td>
+ <asp:Label ID="Label4" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td class="auto-style2">12th percantage:-</td>
+ <td>
+ <asp:Label ID="Label5" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td class="auto-style2">10th Pass Year:-</td>
+ <td>
+ <asp:Label ID="Label6" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td class="auto-style2">10th percantage:-</td>
+ <td>
+ <asp:Label ID="Label7" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td class="auto-style2">Collage PassOutYear:-</td>
+ <td>
+ <asp:Label ID="Label8" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td class="auto-style2">Cpi:-</td>
+ <td>
+ <asp:Label ID="Label9" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td class="auto-style2">LastJobLocation:-</td>
+ <td>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <asp:Label ID="Label10" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td class="auto-style3">Package:-</td>
+ <td class="auto-style4">
+ <asp:Label ID="Label11" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ <tr>
+ <td class="auto-style2">YearOfExperince:-</td>
+ <td>
+ <asp:Label ID="Label12" runat="server"
+Text="Label"></asp:Label>
+ </td>
+ </tr>
+ </table>
+ </div>
+ </form>
+</body>
+</html>
+ 
+ 
+ 
+6.View.aspx.cs 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP11
+{
+ public partial class View : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ Label1.Text = Session["fn"].ToString();
+ Label2.Text = Session["em"].ToString();
+ Label3.Text = Session["po"].ToString();
+ Label4.Text = Session["12y"].ToString();
+ Label5.Text = Session["12p"].ToString();
+ Label6.Text = Session["10y"].ToString();
+ Label7.Text = Session["10p"].ToString();
+ Label8.Text = Session["cy"].ToString();
+ Label9.Text = Session["cpi"].ToString();
+ Label10.Text = Session["lg"].ToString();
+ Label11.Text = Session["pa"].ToString();
+ Label12.Text = Session["yoe"].ToString();
+ }
+ }
+}
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+Multiview Output:-
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 12
+Aim: (i)Use the Asp Navigation control that allows user to navigation and selection facility the
+pages of Web site.
+Procedure:
+ Use Sitemap, tree view and Menu server Control.
+ Bind these controls with the sitemap file for that user the sitemap data source.
+ Bind Tree View and Menu Server Control with the XML file with help of the XML data
+source.
+ Allow Selection and Display Selected values on the Screen.
+Code:-
+1.Web.sitemap
+<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+<siteMapNode title="DDU">
+<siteMapNode url="~/MasterHome" title="Home" description="Home Page">
+ <siteMapNode url="~/MasterIT" title="IT" description="IT Dept." />
+ <siteMapNode url="~/MasterCE" title="CE" description="CE Dept." />
+</siteMapNode>
+</siteMapNode>
+</siteMap>
+2.Site1.master
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs"
+Inherits="EXP12_1.Site1" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+ <title></title>
+ <asp:ContentPlaceHolder ID="head" runat="server">
+ </asp:ContentPlaceHolder>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+ <table style="font-family: Arial; border: 2px">
+ <tr>
+ <td colspan="2" style="width: 800px; height: 80px; textalign: center; background-color: #BDBDBD;">
+ <h1>D D UNIVERSITY
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ </h1>
+ <h3>
+ <asp:SiteMapPath ID="SiteMapPath1"
+runat="server"></asp:SiteMapPath>
+ </h3>
+ </td>
+ </tr>
+<tr>
+ <td style="height: 500px; background-color: #D8D8D8; width: 
+150px">
+ <h3>Menu</h3>
+ <asp:HyperLink ID="HyperLink1" runat="server"
+NavigateUrl="~/MasterIT.aspx">IT</asp:HyperLink>
+ <br />
+ <asp:HyperLink ID="HyperLink2" runat="server"
+NavigateUrl="~/MasterCE.aspx">CE</asp:HyperLink>
+ </td>
+<td style="height: 500px; background-color: #E6E6E6; width: 
+650px">
+ <asp:ContentPlaceHolder ID="MainContent" runat="server">
+ <h1>Section that changes </h1>
+ </asp:ContentPlaceHolder>
+ </td>
+ </tr>
+<tr>
+ <td colspan="2" style="background-color: #BDBDBD; textalign: center">
+ <b>Nadiad</b>
+ </td>
+ </tr>
+ </table>
+ </asp:ContentPlaceHolder>
+ </div>
+ </form>
+</body>
+</html>
+3.MasterHome.aspx
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master"
+AutoEventWireup="true" CodeBehind="MasterHome.aspx.cs" Inherits="EXP12_1.WebForm1"
+%>
+<asp:Content ID="home" ContentPlaceHolderID="MainContent" runat="server">
+ <h1>Welcome to DDU</h1>
+</asp:Content>
+4.MasterIT.aspx
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master"
+AutoEventWireup="true" CodeBehind="MasterIT.aspx.cs" Inherits="EXP12_1.WebForm2" %>
+<asp:Content ID="it" ContentPlaceHolderID="MainContent" runat="server">
+ <h1>Faculty of IT</h1>
+ <h3>IT1</h3>
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ <h3>IT2</h3>
+ <h3>IT3</h3>
+</asp:Content>
+5.MasterCE.aspx
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master"
+AutoEventWireup="true" CodeBehind="MasterCE.aspx.cs" Inherits="EXP12_1.WebForm3" %>
+<asp:Content ID="ce" ContentPlaceHolderID="MainContent" runat="server">
+ <h1>Faculty of CE</h1>
+ <h3>CE1</h3>
+ <h3>CE2</h3>
+ <h3>CE3</h3>
+</asp:Content>
+Output:
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+Aim: (ii) Create an application which displays the advertisement through Ad rotator Server
+Control.
+Procedure:
+ Create GUI for displaying the advertisement.
+ Create Advertisement file(XML File) , Set all the Attribute of the file.
+ Bind the file with XML DataSource .
+ Bind Adrotator control with datasource.
+Code:-
+1.AdContent.xml
+<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements>
+<Ad>
+<ImageUrl>~/image/dice.jpg</ImageUrl>
+<NavigateUrl>https://google.com</NavigateUrl>
+<AlternativeText>google</AlternativeText>
+<Impressions>10</Impressions>
+<Keyword>g</Keyword>
+</Ad>
+<Ad>
+<ImageUrl>~/image/cat.jpg</ImageUrl>
+<NavigateUrl>https://youtube.com</NavigateUrl>
+<AlternativeText>youTube</AlternativeText>
+<Impressions>20</Impressions>
+<Keyword>y</Keyword>
+</Ad>
+</Advertisements>
+2.AdRotator.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Adotator.aspx.cs"
+Inherits="EXP12_2.Adotator" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:AdRotator ID="AdRotator1" runat="server"
+AdvertisementFile="~/AdContent.xml" Target="_blank" />
+ </div>
+ </form>
+</body>
+</html>
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+Output:
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 13
+Aim: Create cache application in which, there should be implementation of File-based
+dependency, key-based dependency, and Time-based dependency.
+Procedure:
+ Create Application with Cache Dependency Class.
+ Use different constructors for different type of dependency.
+ Create two XML file with data, bind it with xml data source.
+ Create buttons which will cache the file in memory, display it and remove it from the
+memory.
+Code:-
+Cache.xml
+<?xml version="1.0" encoding="utf-8" ?>
+<address>
+<add1>
+<nm>kdj</nm>
+<add>naid</add>
+<pno>123</pno>
+</add1>
+<add1>
+<nm>kkkk</nm>
+<add>nad</add>
+<pno>555</pno>
+</add1>
+<add1>
+<nm>kkkk</nm>
+<add>nad</add>
+<pno>555</pno>
+</add1>
+<add1>
+<nm>kkkk</nm>
+<add>nad</add>
+<pno>555</pno>
+</add1>
+</address>
+(1) File based Dependency:
+CacheFileDependency.aspx:
+<%@ Page Language="C#" AutoEventWireup="true"
+CodeBehind="CacheFileDependency.aspx.cs" Inherits="EXP13.CacheFileDependency" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="mylabel1" runat="server" Style="z-index: 100; left: 31px; 
+position: absolute; top: 26px"></asp:Label>
+ <input id="Submit1" runat="server" name="Submit1" onserverclick="Create"
+style="z-index: 102; left: 23px; position: absolute; top: 152px" type="submit"
+value="Create Cache" onclick="return Submit1_onclick()" />
+ <input id="Submit2" runat="server" name="Submit2"
+onserverclick="Display" style="z-index: 103; left: 168px; position: absolute; top: 
+150px" type="submit" value="Display Cache" />
+ <input id="Submit3" runat="server" name="Submit3" onserverclick="Change"
+style="z-index: 104; left: 314px; position: absolute; top: 151px" type="submit"
+value="Change Cache" />
+ <asp:GridView ID="gv" runat="server" Style="z-index: 105; left: 185px; 
+position: absolute; top: 224px"></asp:GridView>
+ </div>
+ </form>
+</body>
+</html>
+CacheFileDependency.aspx.cs:
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Web;
+using System.Web.Caching;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP13
+{
+ public partial class CacheFileDependency : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ { }
+ protected void Create(object sender, EventArgs e)
+ {
+ DataSet ds = new DataSet();
+ ds.ReadXml("F:\\sem 7\\WT\\EXP13\\EXP13\\cache.xml");
+ CacheDependency filedep = new CacheDependency("F:\\sem 
+7\\WT\\EXP13\\EXP13\\cache.xml");
+ Cache.Insert("add", ds, filedep);
+ mylabel1.Text = "cache full";
+ }
+ protected void Display(object sender, EventArgs e)
+ {
+ DataSet ds1 = new DataSet(); if (Cache["add"] == null)
+ {
+ gv.DataSource = null; gv.DataBind();
+ mylabel1.Text = "cache empty";
+ }
+ else
+ {
+ ds1 = (DataSet)Cache["add"];
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ gv.DataSource = ds1;
+ gv.DataBind();
+ }
+ }
+ protected void Change(object sender, EventArgs e)
+ {
+ Cache.Remove("add");
+ mylabel1.Text = "cache removed";
+ }
+ }
+}
+(2) Key based Dependency:
+CacheKeyDependency.aspx:
+<%@ Page Language="C#" AutoEventWireup="true"
+CodeBehind="CacheKeyDependency.aspx.cs" Inherits="EXP13.CacheKeyDependency" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <div>
+ <asp:Label ID="mylabel1" runat="server" Style="z-index: 100; left: 
+66px; position: absolute; top: 20px"></asp:Label>
+ <br />
+ <input id="Submit1" runat="server" name="Submit1"
+onserverclick="Create" style="z-index: 102; left: 21px; position: absolute; top: 
+126px"
+ type="submit" value="Create Cache" />
+ <input id="Submit2" runat="server" name="Submit2"
+onserverclick="Display" style="z-index: 103; left: 181px; position: absolute; top: 
+125px"
+ type="submit" value="Display Cache" />
+ <input id="Submit3" runat="server" name="Submit3"
+onserverclick="Change" style="z-index: 104; left: 354px; position: absolute; top: 
+122px"
+ type="submit" value="Change Cache" />
+ </div>
+ </div>
+ </form>
+</body>
+</html>
+CacheKeyDependency.aspx.cs:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+using System.Web;
+using System.Web.Caching;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP13
+{
+ public partial class CacheKeyDependency : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ { }
+ protected void Create(object sender, EventArgs e)
+ {
+ Cache["address"] = "ddu";
+ Cache["add1"] = "nadiad";
+ string[] keydep;
+ keydep = new string[2];
+ keydep[0] = "address";
+ keydep[1] = "add1";
+ CacheDependency keydependency = new CacheDependency(null, keydep);
+ Cache.Insert("phone", "1123", keydependency);
+ mylabel1.Text = "Cache Full";
+ }
+ protected void Display(object sender, EventArgs e)
+ {
+ if (Cache["phone"] == null)
+ {
+ mylabel1.Text = "Cache Empty";
+ }
+ else
+ {
+ mylabel1.Text = "Address:" + Cache["address"] + "<br>" + 
+Cache["add1"] + "<br> Phone: " + Cache["phone"];
+ }
+ }
+ protected void Change(object sender, EventArgs e)
+ {
+ Cache.Remove("address");
+ Response.Write(Cache["phone"]);
+ mylabel1.Text = "Address removed";
+ }
+ }
+}
+(3) Time based Dependency:
+CacheTimeDependency.aspx:
+<%@ Page Language="C#" AutoEventWireup="true"
+CodeBehind="CacheTimeDependency.aspx.cs" Inherits="EXP13.CacheTimeDependency" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="mylabel1" runat="server" Style="z-index: 100; left: 62px; 
+position: absolute; top: 24px"></asp:Label>
+ <input id="Submit1" runat="server" name="Submit1" onserverclick="Create"
+style="z-index: 102; left: 50px; position: absolute; top: 99px"
+ type="submit" value="Create Cache" onclick="return 
+Submit1_onclick()" />
+ <input id="Submit2" runat="server" name="Submit2"
+onserverclick="Display" style="z-index: 103; left: 238px; position: absolute; top: 
+102px"
+ type="submit" value="Display Cache" />
+ <asp:GridView ID="gv" runat="server" Style="z-index: 104; left: 66px; 
+position: absolute; top: 171px"></asp:GridView>
+ </div>
+ </form>
+</body>
+</html>
+CacheTimeDependency.aspx.cs:
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP13
+{
+ public partial class CacheTimeDependency : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ { }
+ protected void Create(object sender, EventArgs e)
+ {
+ DataSet ds = new DataSet();
+ ds.ReadXml("F:\\sem 7\\WT\\EXP13\\EXP13\\cache.xml");
+ // Cache.Insert("add", ds, 
+null,DateTime.Now.AddSeconds(2),TimeSpan.Zero); Cache.Insert("add", ds, null, 
+Cache.NoAbsoluteExpiration, TimeSpan.FromSeconds(2));
+ mylabel1.Text = "cache full";
+ }
+ protected void Display(object sender, EventArgs e)
+ {
+ DataSet ds1 = new DataSet(); if (Cache["add"] == null)
+ {
+ gv.DataSource = null; gv.DataBind(); mylabel1.Text = "cache empty";
+ }
+ else
+ {
+ ds1 = (DataSet)Cache["add"]; gv.DataSource = ds1; gv.DataBind();
+ }
+ }
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ }
+}
+Output:
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 14
+Aim: Create the Application which gets the user profile from the user with the help of the user
+control.
+Procedure:
+ Create A gui Which Enables user to enter the User’s Profile with help of the User
+Control.
+ Register User Control To the Web Page.
+ Display All details to user on pressing the Submit Button
+Code:-
+Global.asax:
+<%@ Application Language="C#" %>
+<script RunAt="server">
+ void Application_Start(object sender, EventArgs e)
+ {
+ // Code that runs on application startup
+ //Application.Lock();
+ //Application["counts"] = count;
+ //Application["msg"] = "";
+ //Application.UnLock(); Application.Lock(); Application["msg1"] = "";
+ Application["msg2"] = "";
+ Application["msg3"] = ""; Application.UnLock();
+ }
+ void Application_End(object sender, EventArgs e)
+ {
+ // Code that runs on application shutdown
+ }
+ void Application_Error(object sender, EventArgs e)
+ {
+ // Code that runs when an unhandled error occurs
+ }
+ void Session_Start(object sender, EventArgs e)
+ {
+ // Code that runs when a new session is started
+ }
+ void Session_End(object sender, EventArgs e)
+ {
+ // Code that runs when a session ends.
+ // Note: The Session_End event is raised only when the sessionstate mode 
+// is set to InProc in the Web.config file. If session mode is set to StateServer // 
+or SQLServer, the event is not raised.
+ }
+</script>
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+User1->Default1.aspx:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default1.aspx.cs"
+Inherits="EXP14.Default1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Button ID="Button1" runat="server" OnClick="Button1_Click"
+Style="z- index: 1; left: 13px; top: 48px; position: absolute" Text="Button" />
+ </div>
+ <asp:TextBox ID="TextBox1" runat="server" Style="z-index: 1; left: 11px; 
+top: 15px; position: absolute"></asp:TextBox>
+ <p>
+ <asp:Label ID="Label1" runat="server" Style="z-index: 1; left: 28px; 
+top: 164px; position: absolute" Text="Label"></asp:Label>
+ </p>
+ <asp:RadioButtonList ID="RadioButtonList1" runat="server" Style="z-index: 1; 
+left: 10px; top: 91px; position: absolute; height: 27px; width: 82px">
+ <asp:ListItem>User2</asp:ListItem>
+ <asp:ListItem>User3</asp:ListItem>
+ </asp:RadioButtonList>
+ <asp:Label ID="Label2" runat="server" Style="z-index: 1; left: 229px; top: 
+165px; position: absolute" Text="Label"></asp:Label>
+ </form>
+</body>
+</html>
+User1->Default1.aspx.cs:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP14
+{
+ public partial class Default1 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ Application.Lock();
+ Label1.Text = (string)Application["msg2"]; Label2.Text = 
+(string)Application["msg3"]; Application.UnLock(); Response.AppendHeader("Refresh", 
+"7");
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ Application.Lock();
+ if ((RadioButtonList1.SelectedItem.ToString()).Equals("User2"))
+ {
+ string msg = Application["msg2"].ToString() + "User1" + ": " + 
+TextBox1.Text + "<br/>";
+ Application["msg2"] = msg.ToString(); Label1.Text = 
+Application["msg2"].ToString();
+ }
+ else if ((RadioButtonList1.SelectedItem.ToString()).Equals("User3"))
+ {
+ string msg = Application["msg3"].ToString() + "User1" + ": " + 
+TextBox1.Text
+ + "<br/>";
+ Application["msg3"] = msg.ToString(); Label2.Text = 
+Application["msg3"].ToString();
+ }
+ Application.UnLock();
+ }
+ }
+}
+User2->Default2.aspx:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default2.aspx.cs"
+Inherits="EXP14.Default2" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="Label1" runat="server" Style="z-index: 1; left: 16px; 
+top: 84px; position: absolute" Text="Label"></asp:Label>
+ <asp:Button ID="Button1" runat="server" OnClick="Button1_Click"
+Style="z- index: 1; left: 15px; top: 45px; position: absolute" Text="Button" />
+ <asp:TextBox ID="TextBox1" runat="server" Style="z-index: 1; left: 13px; 
+top: 13px; position: absolute"></asp:TextBox>
+ </div>
+ </form>
+</body>
+</html>
+User2->Default2.aspx.cs:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+namespace EXP14
+{
+ public partial class Default2 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ Application.Lock();
+ Label1.Text = (string)Application["msg2"]; Application.UnLock(); 
+Response.AppendHeader("Refresh", "7");
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ Application.Lock(); string msg = Application["msg2"].ToString() + 
+"User2" + ": " + TextBox1.Text + "<br/>";
+ Application["msg2"] = msg.ToString(); Label1.Text = 
+Application["msg2"].ToString(); Application.UnLock();
+ }
+ }
+}
+User3->Default3.aspx:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default3.aspx.cs"
+Inherits="EXP14.Default3" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="Label1" runat="server" Style="z-index: 1; left: 16px; 
+top: 84px; position: absolute" Text="Label"></asp:Label>
+ <asp:Button ID="Button1" runat="server" OnClick="Button1_Click"
+Style="z- index: 1; left: 15px; top: 45px; position: absolute" Text="Button" />
+ <asp:TextBox ID="TextBox1" runat="server" Style="z-index: 1; left: 13px; 
+top: 13px; position: absolute"></asp:TextBox>
+ </div>
+ </form>
+</body>
+</html>
+User3->Default3.aspx.cs:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace EXP14
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+{
+ public partial class Default3 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ Application.Lock();
+ Label1.Text = (string)Application["msg3"]; 
+ Application.UnLock(); 
+ Response.AppendHeader("Refresh", "7");
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ Application.Lock();
+ string msg = Application["msg3"].ToString() + "User3" + ": " + 
+TextBox1.Text + "<br/>";
+ Application["msg3"] = msg.ToString(); 
+ Label1.Text = Application["msg3"].ToString(); 
+ Application.UnLock();
+ }
+ }
+}
+Output:
+User1:
+WEB TECHNOLOGY LAB IT022 | Parth Dedaniya
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+User2:
+User3:
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 15
+Aim: Create an application to show LinQ for built in memory object like array or listand
+database.
+Code:-
+Webform1.aspx:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="EXP15.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:GridView ID="GridView1" runat="server"></asp:GridView>
+ </div>
+ </form>
+</body>
+</html>
+Student.cs:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+namespace EXP15
+{
+ public class Student
+ {
+ public int ID { get; set; }
+ public string Name { get; set; }
+ public string Gender { get; set; }
+ public static List<Student> GetAllStudents()
+ {
+ List<Student> listStudents = new List<Student>();
+ Student student1 = new Student 
+ {
+ ID = 1,
+ Name = "Parth",
+ Gender = "Male"
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+ };
+ listStudents.Add(student1);
+ Student student2 = new Student
+ {
+ ID = 2,
+ Name = "Priya",
+ Gender = "Female"
+ };
+ listStudents.Add(student2);
+ Student student3 = new Student
+ {
+ ID = 3,
+ Name = "Poojan",
+ Gender = "Male"
+ };
+ listStudents.Add(student3);
+ Student student4 = new Student
+ {
+ ID = 4,
+ Name = "Prit",
+ Gender = "Male"
+ };
+ listStudents.Add(student4);
+ return listStudents;
+ }
+ }
+}
+WebForm1.aspx.cs:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="EXP15.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title></title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:GridView ID="GridView1" runat="server"></asp:GridView>
+ </div>
+ </form>
+</body>
+</html>
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+Output:
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+EXPERIMENT – 16
+Aim: Create an asp.net MVC application.
+Code:-
+RouteConfig.cs:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+namespace EXP16
+{
+ public class RouteConfig
+ {
+ public static void RegisterRoutes(RouteCollection routes)
+ {
+ routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+ routes.MapRoute(name: "Default", url: "{controller}/{action}/{id}", defaults: new { controller = "Home", action = 
+"Index", id = UrlParameter.Optional });
+ }
+ }
+}
+HomeController.cs:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+namespace EXP16
+{
+ public class HomeController : Controller
+ {
+ // GET: Home
+ public ActionResult Index()
+ {
+ return View();
+ }
+ }
+}
+WEB TECHNOLOGY LAB IT022 | PARTH DEDANIYA
+Department of Information Technology, Faculty of Technology, D.D.University, Nadiad.
+Index.cshtml:
+@{
+ ViewBag.Title = "Index";
+}
+<h2>
+ Welcome To My MVC Application !!!
+</h2>
+Output:
