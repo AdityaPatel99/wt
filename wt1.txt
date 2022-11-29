@@ -1,0 +1,627 @@
+Web Service
+webservice.cs----------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+using System.Data;
+using System.Data.SqlClient;
+/// <summary>
+/// Summary description for WebService
+/// </summary>
+[WebService(Namespace = "http://tempuri.org/")]
+[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+// To allow this Web Service to be called from script, using ASP.NET AJAX,
+uncomment the following line.
+// [System.Web.Script.Services.ScriptService]
+public class WebService : System.Web.Services.WebService
+{
+public WebService()
+{
+//Uncomment the following line if using designed components
+//InitializeComponent();
+}
+[WebMethod]
+public string HelloWorld()
+{
+return "Hello World";
+}
+[WebMethod]
+public string authenticate(string uname,string pwd)
+{
+SqlConnection cn = new SqlConnection();
+cn.ConnectionString = @"Data
+Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\user1\Docume
+nts\WebSite15\App_Data\Database.mdf;Integrated Security=True";
+cn.Open();
+SqlCommand cmd = new SqlCommand();
+cmd.CommandText = "select * from userdata where
+username='"+uname+"'";
+cmd.Connection = cn;
+int i = 0;
+i = cmd.ExecuteNonQuery();
+SqlDataAdapter sd = new SqlDataAdapter();
+sd.SelectCommand = cmd;
+DataSet ds = new DataSet();
+sd.Fill(ds, "t1");
+//return ""+i;
+if ( (pwd.Equals( ds.Tables["t1"].Rows[0][2].ToString())))
+{
+return "successfully login";
+}
+else
+{
+return "error";
+}
+}
+}
+--------------------------------------------------------------------------------------------
+loginpage.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="login
+page.aspx.cs" Inherits="login_page" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<title></title>
+</head>
+<body>
+<form id="form1" runat="server">
+<div>
+</div>
+<asp:Button ID="Button1" runat="server" CssClass="auto-style5"
+OnClick="Button1_Click" Text="login" />
+<asp:TextBox ID="TextBox1" runat="server"
+CssClass="auto-style4"></asp:TextBox>
+<asp:TextBox ID="TextBox2" runat="server" CssClass="auto-style3"
+TextMode="Password"></asp:TextBox>
+<asp:Label ID="Label1" runat="server" CssClass="auto-style1"
+Text="username"></asp:Label>
+<asp:Label ID="Label2" runat="server" CssClass="auto-style2"
+Text="password"></asp:Label>
+</form>
+</body>
+</html>
+-------------------------------------------------------------------------------------------
+loginpage.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+public partial class login_page : System.Web.UI.Page
+{
+WebService w = new WebService();
+String a, b, c;
+protected void Page_Load(object sender, EventArgs e)
+{
+}
+protected void Button1_Click(object sender, EventArgs e)
+{
+a = TextBox1.Text.ToString();
+b = TextBox2.Text.ToString();
+c = w.authenticate(a, b);
+Response.Write(c.ToString());
+}
+}
+Web Service
+● //WebService1.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+using System.Data.SqlClient;
+using System.Data;
+namespace WebApplication20
+{
+/// <summary>
+/// Summary description for WebService1
+/// </summary>
+[WebService(Namespace = "http://tempuri.org/")]
+[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+[System.ComponentModel.ToolboxItem(false)]
+// To allow this Web Service to be called from script, using ASP.NET AJAX,
+uncomment the following line.
+// [System.Web.Script.Services.ScriptService]
+public class WebService1 : System.Web.Services.WebService
+{
+[WebMethod]
+public string HelloWorld()
+{
+return "Hello World";
+}
+[WebMethod]
+public DataSet getEmployeeDetails(string name)
+{
+SqlConnection con = new SqlConnection();
+con.ConnectionString = "Data
+Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Databa
+se1.mdf;Integrated Security=True";
+con.Open();
+SqlCommand cmd = new SqlCommand();
+cmd.CommandText = "select * from employee where emp_name =
+@emp_name";
+cmd.Connection = con;
+cmd.CommandType = CommandType.Text;
+SqlParameter p = new SqlParameter("@emp_name", name);
+cmd.Parameters.Add(p);
+SqlDataAdapter da = new SqlDataAdapter();
+da.SelectCommand = cmd;
+DataSet ds = new DataSet();
+da.Fill(ds);
+return ds;
+}
+}
+}
+● //WebForm1.aspx
+<%@ Page Language="C#" AutoEventWireup="true"
+CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication21.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<title></title>
+</head>
+<body>
+<form id="form1" runat="server">
+<div>
+<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+<br />
+<asp:Button ID="Button1" OnClick="Button1_Click" runat="server"
+Text="Button" />
+<br />
+<br />
+<asp:GridView ID="GridView1" runat="server"></asp:GridView>
+</div>
+</form>
+</body>
+</html>
+● //WebForm1.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace WebApplication21
+{
+public partial class WebForm1 : System.Web.UI.Page
+{
+protected void Page_Load(object sender, EventArgs e)
+{
+}
+protected void Button1_Click(object sender, EventArgs e)
+{
+employee.WebService1 emp = new employee.WebService1();
+DataSet ds = emp.getEmployeeDetails(TextBox1.Text);
+GridView1.DataSource = ds;
+GridView1.DataBind();
+}
+}
+}
+ENTITY FRAMEWORK
+● Model->Employee.cs
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
+namespace learnEntityFramework.Models
+{
+[Table("tblemp")]
+public class Employee
+{
+[Key]
+public int emp_id { get; set; }
+public string emp_name { get; set; }
+public int emp_salary { get; set; }
+}
+}
+● Model->EmployeeContext.cs
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+namespace learnEntityFramework.Models
+{
+public class EmployeeContext :DbContext
+{
+public DbSet <Employee> employees{get;set;}
+}
+}
+● Controller->EmployeeController.cs
+using learnEntityFramework.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+namespace learnEntityFramework.Controllers
+{
+public class EmployeeController : Controller
+{
+//
+// GET: /Employee/
+public ActionResult Index(int Id)
+{
+EmployeeContext cmd = new EmployeeContext();
+Employee employee1 = cmd.employees.Single(emp => emp.emp_id ==
+Id);
+return View(employee1);
+}
+}
+}
+● View->Employee->Index.cshtml
+@model learnEntityFramework.Models.Employee
+@{
+ViewBag.Title = "Index";
+}
+<h2>Index</h2>
+<table>
+<tr>
+<td>Employee id</td>
+<td>@Model.emp_id</td>
+</tr>
+<tr>
+<td>Employee Name</td>
+<td>@Model.emp_name</td>
+</tr>
+<tr>
+<td>Employee Salary</td>
+<td>@Model.emp_salary</td>
+</tr>
+</table>
+● Global.aspx
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+namespace learnEntityFramework
+{
+// Note: For instructions on enabling IIS6 or IIS7 classic mode,
+// visit http://go.microsoft.com/?LinkId=9394801
+public class MvcApplication : System.Web.HttpApplication
+{
+public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+{
+filters.Add(new HandleErrorAttribute());
+}
+public static void RegisterRoutes(RouteCollection routes)
+{
+routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+routes.MapRoute(
+"Default", // Route name
+"{controller}/{action}/{id}", // URL with parameters
+new { controller = "Home", action = "Index", id = UrlParameter.Optional
+} // Parameter defaults
+);
+}
+protected void Application_Start()
+{
+Database.SetInitializer<learnEntityFramework.Models.EmployeeContext>(null);
+AreaRegistration.RegisterAllAreas();
+// Use LocalDB for Entity Framework by default
+Database.DefaultConnectionFactory = new
+SqlConnectionFactory(@"Data Source=(localdb)\v11.0; Integrated Security=True;
+MultipleActiveResultSets=True");
+RegisterGlobalFilters(GlobalFilters.Filters);
+RegisterRoutes(RouteTable.Routes);
+}
+}
+}
+● WebForm1.aspx
+<%@ Page Language="C#" AutoEventWireup="true"
+CodeBehind="WebForm1.aspx.cs" Inherits="learnEntityFramework.WebForm1"
+%>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<title></title>
+</head>
+<body>
+<form id="form1" runat="server">
+<div>
+</div>
+<asp:SqlDataSource ID="SqlDataSource1" runat="server"
+ConnectionString="<%$ ConnectionStrings:EmployeeContext %>"
+SelectCommand="SELECT * FROM [tblemp]"></asp:SqlDataSource>
+</form>
+</body>
+</html>
+LINQ_ALL_OPERATION
+● Views->EmpCrud->Index.cshtml
+@model IEnumerable<LinqCRUDopeartions.tblemp>
+@{
+ViewBag.Title = "Index";
+}
+<h2>Index</h2>
+<p>
+@Html.ActionLink("Create New", "Create")
+</p>
+<table>
+<tr>
+<th>
+@Html.DisplayNameFor(model => model.emp_name)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.emp_salary)
+</th>
+<th></th>
+</tr>
+@foreach (var item in Model) {
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.emp_name)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.emp_salary)
+</td>
+<td>
+@Html.ActionLink("Edit", "Edit", new { id=item.emp_id }) |
+@Html.ActionLink("Details", "Details", new { id=item.emp_id }) |
+@Html.ActionLink("Delete", "Delete", new { id=item.emp_id })
+</td>
+</tr>
+}
+</table>
+● Views->EmpCrud->Create.cshtml
+@model LinqCRUDopeartions.tblemp
+@{
+ViewBag.Title = "Create";
+}
+<h2>Create</h2>
+@using (Html.BeginForm()) {
+@Html.ValidationSummary(true)
+<fieldset>
+<legend>tblemp</legend>
+<div class="editor-label">
+@Html.LabelFor(model => model.emp_name)
+</div>
+<div class="editor-field">
+@Html.EditorFor(model => model.emp_name)
+@Html.ValidationMessageFor(model => model.emp_name)
+</div>
+<div class="editor-label">
+@Html.LabelFor(model => model.emp_salary)
+</div>
+<div class="editor-field">
+@Html.EditorFor(model => model.emp_salary)
+@Html.ValidationMessageFor(model => model.emp_salary)
+</div>
+<p>
+<input type="submit" value="Create" />
+</p>
+</fieldset>
+}
+<div>
+@Html.ActionLink("Back to List", "Index")
+</div>
+● Views->EmpCrud->Edit.cshtml
+@model LinqCRUDopeartions.tblemp
+@{
+ViewBag.Title = "Edit";
+}
+<h2>Edit</h2>
+@using (Html.BeginForm()) {
+@Html.ValidationSummary(true)
+<fieldset>
+<legend>tblemp</legend>
+@Html.HiddenFor(model => model.emp_id)
+<div class="editor-label">
+@Html.LabelFor(model => model.emp_name)
+</div>
+<div class="editor-field">
+@Html.EditorFor(model => model.emp_name)
+@Html.ValidationMessageFor(model => model.emp_name)
+</div>
+<div class="editor-label">
+@Html.LabelFor(model => model.emp_salary)
+</div>
+<div class="editor-field">
+@Html.EditorFor(model => model.emp_salary)
+@Html.ValidationMessageFor(model => model.emp_salary)
+</div>
+<p>
+<input type="submit" value="Save" />
+</p>
+</fieldset>
+}
+<div>
+@Html.ActionLink("Back to List", "Index")
+</div>
+● Views->EmpCrud->Details.cshtml
+@model LinqCRUDopeartions.tblemp
+@{
+ViewBag.Title = "Details";
+}
+<h2>Details</h2>
+<fieldset>
+<legend>tblemp</legend>
+<div class="display-label">
+@Html.DisplayNameFor(model => model.emp_name)
+</div>
+<div class="display-field">
+@Html.DisplayFor(model => model.emp_name)
+</div>
+<div class="display-label">
+@Html.DisplayNameFor(model => model.emp_salary)
+</div>
+<div class="display-field">
+@Html.DisplayFor(model => model.emp_salary)
+</div>
+</fieldset>
+<p>
+@Html.ActionLink("Edit", "Edit", new { id=Model.emp_id }) |
+@Html.ActionLink("Back to List", "Index")
+</p>
+● Controller->EmpCrudController.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+namespace LinqCRUDopeartions.Controllers
+{
+public class EmpCrudController : Controller
+{
+LinqCrudOPDataContext dc = new LinqCrudOPDataContext();
+//
+// GET: /EmpCrud/
+public ActionResult Index()
+{
+//retrive all the record from tbl employees
+var empdetails = from x in dc.tblemps select x;
+return View(empdetails);
+}
+//
+// GET: /EmpCrud/Details/5
+public ActionResult Details(int id)
+{
+var empdetails = dc.tblemps.Single(x => x.emp_id == id);
+return View(empdetails);
+}
+//
+// GET: /EmpCrud/Create
+public ActionResult Create()
+{
+return View();
+}
+//
+// POST: /EmpCrud/Create
+[HttpPost]
+public ActionResult Create(tblemp collection)
+{
+try
+{
+// TODO: Add insert logic here
+dc.tblemps.InsertOnSubmit(collection);
+dc.SubmitChanges();
+return RedirectToAction("Index");
+}
+catch
+{
+return View();
+}
+}
+//
+// GET: /EmpCrud/Edit/5
+public ActionResult Edit(int id)
+{
+var empdetails = dc.tblemps.Single(x => x.emp_id == id);
+return View(empdetails);
+}
+//
+// POST: /EmpCrud/Edit/5
+[HttpPost]
+public ActionResult Edit(int id, tblemp collection)
+{
+try
+{
+// TODO: Add update logic here
+tblemp emp = dc.tblemps.Single(x => x.emp_id == id);
+//emp.emp_id = collection.emp_id;
+emp.emp_name = collection.emp_name;
+emp.emp_salary = collection.emp_salary;
+dc.SubmitChanges();
+return RedirectToAction("Index");
+}
+catch
+{
+return View();
+}
+}
+//
+// GET: /EmpCrud/Delete/5
+public ActionResult Delete(int id)
+{
+return View();
+}
+//
+// POST: /EmpCrud/Delete/5
+[HttpPost]
+public ActionResult Delete(int id, FormCollection collection)
+{
+try
+{
+// TODO: Add delete logic here
+return RedirectToAction("Index");
+}
+catch
+{
+return View();
+}
+}
+}
+}
+CALC_MVC
+● Views->getcal.cshtml
+@{
+ViewBag.Title = "getcal";
+}
+<h2>getcal</h2>
+@Html.BeginForm("getcal","Home",FormMethod.Post)
+{
+<table>
+<tr>
+<td>first number</td>
+<td> <input type="text" id="txtfirstnumber" name="a"
+value="@ViewBag.first" /></td>
+</tr>
+<tr>
+<td>first number</td>
+<td> <input type="text" id="txtsecondnumber" name="b"
+value="@ViewBag.second" /></td>
+</tr>
+<tr>
+<td>first number</td>
+<td> <input type="text" id="txtthirdnumber" name="re"
+value="@ViewBag.result" /></td>
+</tr>
+<tr>
+<td> <input id="add1" type="submit" value="add" name="cal" /></td>
+</tr>
+<tr>
+<td> <input id="sub1" type="submit" value="sub" name="cal" /></td>
+</tr>
+</table>
+}
+● Controller->CalcController.cs
+namespace MvcApplication3.Controllers
+{
+public class HomeController : Controller
+{
+//
+// GET: /Home/
+public ActionResult Index()
+{
+return View();
+}
+public ActionResult getcal(string a,string b,string cal)
+{
+Response.Write("A= " + a + " B= " + b + " opeation=" + cal);
+int firstp = Convert.ToInt32(a);
+int secondp = Convert.ToInt32(b);
+int result = 0;
+if (cal == "add")
+{
+result = firstp + secondp;
+}
+if (cal == "sub")
+{
+result = firstp - secondp;
+}
+ViewBag.first = a;
+ViewBag.second = b;
+ViewBag.result = result;
+return View();
+}
+}
+}
